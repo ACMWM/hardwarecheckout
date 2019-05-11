@@ -2,12 +2,13 @@ from flask import session, abort
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import make_google_blueprint, google
 import requests
+import os
 
 bp = make_google_blueprint(
-    client_id="foo",
-    client_secret="bar",
+    client_id=os.environ.get("GOOGLE_OAUTH_CLIENT_ID"),
+    client_secret=os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
     scope=["profile", "email"],
-    hosted_domain="acmhw.tookmund.com"
+    hosted_domain=os.environ.get("APP_URL")
 )
 
 @oauth_authorized.connect_via(bp)
