@@ -1,4 +1,4 @@
-db = "sqlite://test.db"
+db = "sqlite:///test.db"
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
