@@ -1,5 +1,5 @@
 flask
-flask-dance
+flask-dance[sqla]
 sqlalchemy
 blinker
 gunicorn
