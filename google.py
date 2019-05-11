@@ -4,6 +4,8 @@ from flask_dance.contrib.google import make_google_blueprint, google
 import requests
 import os
 
+import auth
+
 bp = make_google_blueprint(
     client_id=os.environ.get("GOOGLE_OAUTH_CLIENT_ID"),
     client_secret=os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET"),
@@ -20,13 +22,16 @@ def userinfo():
     return resp.json()
 
 @oauth_authorized.connect_via(bp)
-def check_hosted_domain(blueprint, token):
-    resp_json = userinfo()
-    if resp_json["hd"] != blueprint.authorization_url_params["hd"]:
-        print("HOSTED DOMAIN ERROR: "+resp_json["hd"])
+def check_hosted_domain_and_email(blueprint, token):
+    user = userinfo()
+    if user["hd"] != blueprint.authorization_url_params["hd"]:
+        print("HOSTED DOMAIN ERROR: "+user["hd"])
         requests.post(
             "https://accounts.google.com/o/oauth2/revoke",
             params={"token": token["access_token"]}
         )
         session.clear()
         abort(403)
+    if auth.checkemail(user['email'])
+        print("VALID EMAIL "+user['email'])
+        session['user'] = user['email']
