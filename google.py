@@ -6,7 +6,7 @@ import os
 
 bp = make_google_blueprint(
     client_id=os.environ.get("GOOGLE_OAUTH_CLIENT_ID"),
-    client_secret=os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET")
+    client_secret=os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET"),
     scope=["profile", "email"],
     hosted_domain=os.environ.get("APP_URL")
 )
