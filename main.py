@@ -7,6 +7,7 @@ import sql
 
 app = Flask(__name__)
 app.secret_key=os.urandom(16)
+app.register_blueprint(google.bp, url_prefix="/login")
 
 sql.init_db()
 
