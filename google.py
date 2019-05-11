@@ -32,6 +32,6 @@ def check_hosted_domain_and_email(blueprint, token):
         )
         session.clear()
         abort(403)
-    if auth.checkemail(user['email'])
+    if auth.checkemail(user['email']):
         print("VALID EMAIL "+user['email'])
         session['user'] = user['email']
