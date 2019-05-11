@@ -8,7 +8,7 @@ bp = make_google_blueprint(
     client_id=os.environ.get("GOOGLE_OAUTH_CLIENT_ID"),
     client_secret=os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET"),
     scope=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"],
-    hosted_domain=os.environ.get("APP_URL")
+    hosted_domain="email.wm.edu"
 )
 
 def loggedin():
@@ -20,7 +20,7 @@ def userinfo():
     return resp.json()
 
 @oauth_authorized.connect_via(bp)
-def check_logged_in(blueprint, token):
+def check_hosted_domain(blueprint, token):
     resp_json = userinfo()
     if resp_json["hd"] != blueprint.authorization_url_params["hd"]:
         requests.post(
