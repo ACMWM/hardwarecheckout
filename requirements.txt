@@ -1,0 +1,4 @@
+flask
+flask-dance
+sqlalchemy
+blinker
