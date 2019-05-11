@@ -23,12 +23,10 @@ def userinfo():
 def check_hosted_domain(blueprint, token):
     resp_json = userinfo()
     if resp_json["hd"] != blueprint.authorization_url_params["hd"]:
+        print("HOSTED DOMAIN ERROR: "+resp_json["hd"])
         requests.post(
             "https://accounts.google.com/o/oauth2/revoke",
             params={"token": token["access_token"]}
         )
         session.clear()
-        print("LOGIN ERROR")
         abort(403)
-    else:
-        print(resp_json)
