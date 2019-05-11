@@ -15,3 +15,7 @@ def init_db():
     import models
     import oauthdb
     Base.metadata.create_all(bind=engine)
+
+def checkemail(email):
+    print(db_session.query(User).filterby(email=email))
+    return True
