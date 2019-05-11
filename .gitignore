@@ -1,2 +1,8 @@
 __pycache__
 test.db
+
+# virtualenv
+bin/
+include/
+lib/
+share/
