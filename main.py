@@ -19,7 +19,7 @@ def shutdown_session(exception=None):
 def hello():
     if google.loggedin():
         user = google.userinfo()
-        return "Hello "+user['email']
+        return "Hello "+user['email']+"\n\n"+str(user)
     else:
         return "Not logged in"
 
