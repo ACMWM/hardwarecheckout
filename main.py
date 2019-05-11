@@ -23,6 +23,13 @@ def hello():
     else:
         return "Not logged in"
 
+@app.route("/privacy")
+def private():
+    return """
+We hereby promise never to ever do anything with your information except
+use your email to confirm you are authorized to check out hardware for the
+William and Mary ACM.
+"""
 
 if __name__ == "__main__":
     app.run()
