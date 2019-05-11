@@ -11,6 +11,14 @@ bp = make_google_blueprint(
     hosted_domain=os.environ.get("APP_URL")
 )
 
+def loggedin():
+    return google.authorized
+
+def userinfo():
+    resp = google.get("/oauth2/v1/userinfo")
+    assert resp.ok, resp.text
+    return resp.json()
+
 @oauth_authorized.connect_via(bp)
 def logged_in(blueprint, token):
     resp_json = google.get("/oauth2/v2/userinfo").json()
