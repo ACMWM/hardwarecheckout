@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from flask import Flask
 
-import oauth
+import google
 import sql
 
 app = Flask(__name__)
