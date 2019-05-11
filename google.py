@@ -29,3 +29,5 @@ def check_hosted_domain(blueprint, token):
         )
         session.clear()
         abort(403)
+    else:
+        print(resp_json)
