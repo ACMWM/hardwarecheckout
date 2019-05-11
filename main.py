@@ -17,7 +17,11 @@ def shutdown_session(exception=None):
 
 @app.route("/")
 def hello():
-    return "Hello World!!"
+    if google.loggedin():
+        user = google.userinfo()
+        return "Hello "+user['email']
+    else:
+        return "Not logged in"
 
 
 if __name__ == "__main__":
