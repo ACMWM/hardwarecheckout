@@ -13,6 +13,9 @@ bp = make_google_blueprint(
     hosted_domain="email.wm.edu"
 )
 
+def setstorage(s):
+    bp.storage = s
+
 def loggedin():
     return google.authorized
 

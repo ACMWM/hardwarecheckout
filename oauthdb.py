@@ -5,6 +5,13 @@ from flask_dance.consumer.storage.sqla import OAuthConsumerMixin, SQLAlchemyStor
 from sql import Base
 from models import User
 
+import google
+import auth
+
 class OAuth(OAuthConsumerMixin, Base):
     user_id = Column(Integer, ForeignKey(User.id))
     user = relationship(User)
+
+def storage(session):
+    store = SQLAlchemyStorage(OAuth, session, user=auth.getuser)
+    google.setstorage(store)
