@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask
+from flask import Flask, url_for, redirect
 import os
 
 import google
@@ -23,6 +23,10 @@ def hello():
         return "Hello "+user['email']
     else:
         return "Not logged in"
+
+@app.route("/auth")
+def login():
+    return redirect(url_for("google.login"))
 
 @app.route("/privacy")
 def private():
