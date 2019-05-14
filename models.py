@@ -1,8 +1,9 @@
 from sqlalchemy import Column, Boolean, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from sql import Base
+from flask_login import UserMixin
 
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     email = Column(String)

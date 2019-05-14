@@ -4,10 +4,12 @@ import os
 
 import google
 import sql
+import login
 
 app = Flask(__name__)
 app.secret_key=os.urandom(16)
 app.register_blueprint(google.bp, url_prefix="/login")
+login.init(app)
 
 sql.init_db()
 

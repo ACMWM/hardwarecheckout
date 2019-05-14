@@ -20,3 +20,6 @@ def init_db():
 def checkemail(email):
     print(db_session.query(User).filterby(email=email))
     return True
+
+def getuser(uid):
+    return db_session.query(User).get(uid)

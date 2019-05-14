@@ -3,3 +3,4 @@ flask-dance[sqla]
 sqlalchemy
 blinker
 gunicorn
+flask-login
