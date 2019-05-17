@@ -15,3 +15,5 @@ class HW(Base):
     name = Column(String)
     quantity = Column(Integer)
     whom = Column(String)
+    authorized_email = Column(String, ForeignKey(User.email))
+    authorized_user = relationship(User)
