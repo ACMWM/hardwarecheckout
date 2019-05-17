@@ -19,6 +19,8 @@ class HW(Base):
 
 
 class Checkouts(Base):
+    __tablename__ = "Checkouts"
+    id = Column(Integer, primary_key=True)
     outdate = Column(Date)
     returndate = Column(Date)
     whom = Column(String)
