@@ -9,6 +9,6 @@ input("Are you sure you want to add "+sys.argv[1]+"? Press Ctrl+C to cancel,"
         "or anything else to continue")
 
 
-u = User(name="", email=sys.argv[1])
+u = User(email=sys.argv[1])
 sql.add(u)
 sql.commit()
