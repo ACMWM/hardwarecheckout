@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, url_for, redirect
+from flask import Flask, url_for, redirect, render_template
 import os
 
 import google
@@ -22,9 +22,7 @@ def hello():
     if google.loggedin():
         user = google.userinfo()
         print("LOGGED IN "+user['email'])
-        return "Hello "+user['email']
-    else:
-        return "Not logged in"
+    return render_template("index.html")
 
 @app.route("/auth")
 def login():
