@@ -29,3 +29,10 @@ def checkemail(email):
 
 def getuser(uid):
     return db_session.query(User).get(uid)
+
+def search(keyword):
+    from models import HW
+    if keyword is None:
+        return db_session.query(HW)
+    else:
+        return db_session.query(HW).filter(HW.name.like('%'+keyword+'%'))

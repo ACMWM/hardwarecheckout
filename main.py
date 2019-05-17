@@ -36,5 +36,11 @@ use your email to confirm you are authorized to check out hardware for the
 William and Mary ACM.
 """
 
+@app.route("/list/")
+@app.route("/list/<keyword>")
+def search(keyword=None):
+    s = sql.search(keyword)
+    return render_template("list.html", objs=s)
+
 if __name__ == "__main__":
     app.run()
