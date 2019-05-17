@@ -17,6 +17,12 @@ def init_db():
     #oauthdb.storage(db_session)
     Base.metadata.create_all(bind=engine)
 
+def add(obj):
+    db_session.add(obj)
+
+def commit():
+    db_session.commit()
+
 def checkemail(email):
     print(db_session.query(User).filterby(email=email))
     return True
