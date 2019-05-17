@@ -3,7 +3,7 @@ from flask import Flask, url_for, redirect, render_template
 import os
 
 import google
-#import sql
+import sql
 #import login
 
 app = Flask(__name__)
@@ -11,11 +11,11 @@ app.secret_key=os.urandom(16)
 app.register_blueprint(google.bp, url_prefix="/login")
 #login.init(app)
 
-#sql.init_db()
+sql.init_db()
 
-#@app.teardown_appcontext
-#def shutdown_session(exception=None):
-#    sql.db_session.remove()
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    sql.db_session.remove()
 
 @app.route("/")
 def hello():
