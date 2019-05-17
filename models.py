@@ -12,8 +12,19 @@ class User(Base, UserMixin):
 class HW(Base):
     __tablename__ = "HW"
     id = Column(Integer, primary_key=True)
+    category = Column(String)
     name = Column(String)
     quantity = Column(Integer)
+    available = Column(Integer)
+
+
+class Checkouts(Base):
+    outdate = Column(Date)
+    returndate = Column(Date)
     whom = Column(String)
+    what = Column(Integer, ForeignKey(HW.id))
+    hardware = relationship(HW)
+    reason = Column(String)
+    quantity = Column(Integer)
     authorized_email = Column(String, ForeignKey(User.email))
     authorized_user = relationship(User)
