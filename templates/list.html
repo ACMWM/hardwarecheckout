@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}List{% endblock %}
+
+{% block content %}
+{% if objs %}
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Available</th>
+		<th>Quantity</th>
+	</tr>
+	{% for i in objs %}
+		<tr>
+			<td> {{ i.name }} </td>
+			<td> {{ i.available }} </td>
+			<td> {{ i.quantity }} </td>
+		</tr>
+	{% endfor %}
+</table>
+
+{% else %}
+No Results found!
+{% endif %}
+{% endblock %}
