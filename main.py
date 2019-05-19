@@ -29,9 +29,13 @@ def hello():
 def login():
     return redirect(url_for("google.login"))
 
-@app.route("/add")
+@app.route("/add", methods=["GET", "POST"])
 def add():
     form = forms.AddHW()
+    if form.validate_on_submit():
+        print("Adding "+form.name.data)
+        sql.addhw(form.name.data, form.category.data, form.quantity.data)
+        return redirect(url_for("list"))
     return render_template("addhw.html", form=form)
 
 @app.route("/privacy")
@@ -44,7 +48,7 @@ William and Mary ACM.
 
 @app.route("/list/")
 @app.route("/list/<keyword>")
-def search(keyword=None):
+def list(keyword=None):
     s = sql.search(keyword)
     return render_template("list.html", objs=s)
 
