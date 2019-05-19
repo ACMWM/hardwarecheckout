@@ -29,7 +29,7 @@ def hello():
 def login():
     return redirect(url_for("google.login"))
 
-@app.route("/add", methods=["GET", "POST"])
+@app.route("/add/", methods=["GET", "POST"])
 def add():
     form = forms.AddHW()
     if form.validate_on_submit():
