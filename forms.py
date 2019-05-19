@@ -1,5 +1,7 @@
+from datetime import datetime
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, BooleanField, IntegerField, SubmitField
+from wtforms import StringField, BooleanField, IntegerField, SubmitField
+from wtforms.fields.html5 import DateTimeField
 from wtforms.validators import DataRequired
 
 
@@ -16,12 +18,14 @@ class UpdateHW(FlaskForm):
     pass
 
 class Checkout(FlaskForm):
-    outdate = DateField("Date", validators=[DataRequired()])
-    whom = StringField("Who", validators=[DataRequired()])
+    outdate = DateTimeField("Date", validators=[DataRequired()],
+            default=datetime.now())
+    who = StringField("Who", validators=[DataRequired()])
     #what =
     reason = StringField("Reason")
     quantity = IntegerField("Quantity", validators=[DataRequired()])
     #authorized =
+    submit = SubmitField("Checkout")
 
 class Checkin(FlaskForm):
     pass
