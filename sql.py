@@ -49,3 +49,10 @@ def addhw(name, category, quantity):
     h = HW(name=name, category=category, quantity=quantity, available=quantity)
     print(h)
     add(h)
+
+def current():
+    return db_session.query(Checkout).filter_by(returndate=None).all()
+
+def history():
+    return db_session.query(Checkout).filter_by(returndate!=None).all()
+

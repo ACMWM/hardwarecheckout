@@ -77,11 +77,11 @@ def list(keyword=None):
 
 @app.route("/current/")
 def current():
-    pass
+    return render_template("checkouts.html", rows=sql.current())
 
 @app.route("/history/")
 def history():
-    pass
+    return render_template("checkouts.html", rows=sql.history())
 
 if __name__ == "__main__":
     app.run()
