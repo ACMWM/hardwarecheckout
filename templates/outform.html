@@ -1,0 +1,11 @@
+{% extends "form.html" %}
+{% block title %}Checkout{% endblock %}
+
+{% block form %}
+{{ rf(form.outdate) }}
+{{ rf(form.who) }}
+{# {{ rf(form.what) }} #}
+{{ rf(form.quantity) }}
+{{ rf(form.reason) }}
+{# {{ rf(form.authorized }} #}
+{% endblock %}

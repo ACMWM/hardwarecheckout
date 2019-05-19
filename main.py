@@ -51,9 +51,16 @@ def delete(id):
     except ValueError:
         return err
 
-@app.route("/checkout/<id>/")
+@app.route("/checkout/<id>/", methods=["GET", "POST"])
 def checkout(id):
-    pass
+    form = forms.Checkout()
+    if form.validate_on_submit():
+        print("Checkout by "+form.who.data)
+        sql.checkout(form.outdate.data, form.who.data, None, form.reason.data,
+                form.quantity.data, None)
+        return redirect(url_for("current"))
+    else:
+        return render_template("outform.html", form=form)
 
 @app.route("/show/<id>/")
 def show(id):
