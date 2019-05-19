@@ -40,7 +40,9 @@ def add():
 
 @app.route("/delete/<id>/")
 def delete(id):
-    pass
+    hw = sql.gethw(id)
+    sql.delete(hw)
+    return ""+str(hw)+"Deleted."
 
 @app.route("/checkout/<id>/")
 def checkout(id):
