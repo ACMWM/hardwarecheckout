@@ -11,6 +11,8 @@ db_session = scoped_session(sessionmaker(autocommit=False,
 Base = declarative_base()
 Base.query = db_session.query_property()
 
+from models import HW, User, Checkouts
+
 def init_db():
     import models
     #import oauthdb
@@ -32,14 +34,12 @@ def getuser(uid):
     return db_session.query(User).get(uid)
 
 def search(keyword):
-    from models import HW
     if keyword is None:
         return db_session.query(HW)
     else:
         return db_session.query(HW).filter(HW.name.like('%'+keyword+'%'))
 
 def addhw(name, category, quantity):
-    from models import HW
     h = HW(name=name, category=category, quantity=quantity, available=quantity)
     print(h)
     add(h)
