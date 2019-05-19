@@ -50,7 +50,9 @@ def checkout(id):
 
 @app.route("/show/<id>/")
 def show(id):
-    pass
+    hw=sql.gethw(id)
+    print(hw)
+    return render_template("hw.html", hw=hw)
 
 @app.route("/privacy")
 def private():
