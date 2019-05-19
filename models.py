@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Boolean, Integer, String, ForeignKey, Date
+from sqlalchemy import Column, Boolean, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from sql import Base
 from flask_login import UserMixin
@@ -21,8 +21,8 @@ class HW(Base):
 class Checkout(Base):
     __tablename__ = "Checkouts"
     id = Column(Integer, primary_key=True)
-    outdate = Column(Date)
-    returndate = Column(Date)
+    outdate = Column(DateTime)
+    returndate = Column(DateTime)
     who = Column(String)
     what = Column(Integer, ForeignKey(HW.id))
     hardware = relationship(HW)
