@@ -40,9 +40,16 @@ def add():
 
 @app.route("/delete/<id>/")
 def delete(id):
-    hw = sql.gethw(id)
-    sql.delete(hw)
-    return ""+str(hw)+"Deleted."
+    err = "No such id."
+    try:
+        hw = sql.gethw(int(id))
+        if hw is not None:
+            sql.delete(hw)
+            return hw.name+" Deleted."
+        else:
+            return err
+    except ValueError:
+        return err
 
 @app.route("/checkout/<id>/")
 def checkout(id):
