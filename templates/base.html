@@ -7,7 +7,7 @@
 <body>
 <nav>
   <h1>Hardware</h1>
-  <ul>
+  <ul class='navlist'>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span>
       <li><a href="{{ url_for('google.logout') }}">Log Out</a>
