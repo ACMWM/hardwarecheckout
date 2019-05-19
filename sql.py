@@ -36,6 +36,9 @@ def checkemail(email):
 def getuser(uid):
     return db_session.query(User).get(uid)
 
+def gethw(id):
+    return db_session.query(HW).filter(HW.id==id)
+
 def search(keyword):
     if keyword is None:
         return db_session.query(HW)
