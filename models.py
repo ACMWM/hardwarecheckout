@@ -23,7 +23,7 @@ class Checkouts(Base):
     id = Column(Integer, primary_key=True)
     outdate = Column(Date)
     returndate = Column(Date)
-    whom = Column(String)
+    who = Column(String)
     what = Column(Integer, ForeignKey(HW.id))
     hardware = relationship(HW)
     reason = Column(String)
