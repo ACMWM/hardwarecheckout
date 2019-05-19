@@ -16,6 +16,8 @@
 			<td> {{ i.name }} </td>
 			<td> {{ i.available }} </td>
 			<td> {{ i.quantity }} </td>
+			<td> <a href="/checkout/{{ i.id }}/">Checkout</a> </td>
+			<!-- <td><a href="/delete/{{ i.id }}/">Delete</a> </td> -->
 		</tr>
 	{% endfor %}
 </table>
