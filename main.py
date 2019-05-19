@@ -38,6 +38,18 @@ def add():
         return redirect(url_for("list"))
     return render_template("addhw.html", form=form)
 
+@app.route("/delete/<id>/")
+def delete(id):
+    pass
+
+@app.route("/checkout/<id>/")
+def checkout(id):
+    pass
+
+@app.route("/show/<id>/")
+def show(id):
+    pass
+
 @app.route("/privacy")
 def private():
     return """
@@ -51,6 +63,14 @@ William and Mary ACM.
 def list(keyword=None):
     s = sql.search(keyword)
     return render_template("list.html", objs=s)
+
+@app.route("/current/")
+def current():
+    pass
+
+@app.route("/history/")
+def history():
+    pass
 
 if __name__ == "__main__":
     app.run()
