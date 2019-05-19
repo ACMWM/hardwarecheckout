@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import rf %}
+
+{% block content %}
+<h2>{% block title %}{% endblock %}</h2>
+<form method="post" action="">
+	{{ form.hidden_tag() }}
+	{% block form %}{% endblock %}
+	<div>{{ form.submit() }}</div>
+</form>
+{% if form.errors %}
+	{% for _,e in form.errors.items() %}
+		<div>
+			{% for l in e %}
+				{{ l }}
+			{% endfor %}
+		</div>
+	{% endfor %}
+{% endif %}
+{% endblock %}
