@@ -17,11 +17,12 @@ def init_db():
     #oauthdb.storage(db_session)
     Base.metadata.create_all(bind=engine)
 
-def add(obj):
-    db_session.add(obj)
-
 def commit():
     db_session.commit()
+
+def add(obj):
+    db_session.add(obj)
+    sql.commit()
 
 def checkemail(email):
     print(db_session.query(User).filterby(email=email))
@@ -36,3 +37,9 @@ def search(keyword):
         return db_session.query(HW)
     else:
         return db_session.query(HW).filter(HW.name.like('%'+keyword+'%'))
+
+def addhw(name, category, quantity):
+    from models import HW
+    h = HW(name=name, category=category, quantity=quantity, available=quantity)
+    print(h)
+    add(h)
