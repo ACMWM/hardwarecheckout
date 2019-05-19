@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}{{ hw.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ hw.name }}</h2>
+<div>Category: {{ hw.category }}</div>
+<div>Quantity: {{ hw.quantity }}</div>
+<div>Available: {{ hw.available }}</div>
+{% endblock %}
