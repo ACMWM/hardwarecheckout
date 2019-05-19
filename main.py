@@ -5,9 +5,10 @@ import os
 import google
 import sql
 #import login
+import forms
 
 app = Flask(__name__)
-app.secret_key=os.urandom(16)
+app.secret_key=os.environ.get("SECRET_KEY") or os.urandom(16)
 app.register_blueprint(google.bp, url_prefix="/login")
 #login.init(app)
 
@@ -27,6 +28,11 @@ def hello():
 @app.route("/auth")
 def login():
     return redirect(url_for("google.login"))
+
+@app.route("/add")
+def add():
+    form = forms.AddHW()
+    return render_template("addhw.html", form=form)
 
 @app.route("/privacy")
 def private():

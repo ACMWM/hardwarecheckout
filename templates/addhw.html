@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import rf %}
+
+{% block title%}Add Hardware{% endblock%}
+
+{% block content %}
+<h2>Add Hardware</h2>
+<form method="post">
+	{{ rf(form.name) }}
+	{{ rf(form.category) }}
+	{{ rf(form.quantity) }}
+	<div>{{ form.submit() }}</div>
+</form>
+{% endblock %}
