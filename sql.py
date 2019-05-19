@@ -24,7 +24,7 @@ def commit():
 
 def add(obj):
     db_session.add(obj)
-    sql.commit()
+    commit()
 
 def delete(obj):
     db_session.delete(obj)
