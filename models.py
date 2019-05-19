@@ -18,7 +18,7 @@ class HW(Base):
     available = Column(Integer)
 
 
-class Checkouts(Base):
+class Checkout(Base):
     __tablename__ = "Checkouts"
     id = Column(Integer, primary_key=True)
     outdate = Column(Date)
