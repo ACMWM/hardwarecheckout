@@ -37,7 +37,7 @@ def getuser(uid):
     return db_session.query(User).get(uid)
 
 def gethw(id):
-    return db_session.query(HW).filter(HW.id==id)
+    return db_session.query(HW).get(id)
 
 def search(keyword):
     if keyword is None:
