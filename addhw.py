@@ -14,4 +14,3 @@ else:
 h = models.HW(name=sys.argv[1], quantity=q, available=q)
 
 sql.add(h)
-sql.commit()
