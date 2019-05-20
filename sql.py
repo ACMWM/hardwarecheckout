@@ -51,10 +51,10 @@ def addhw(name, category, quantity):
     add(h)
 
 def current():
-    return db_session.query(Checkout).filter(Checkout.outdate==None).all()
+    return db_session.query(Checkout).filter(Checkout.returndate==None).all()
 
 def history():
-    return db_session.query(Checkout).filter(Checkout.outdate!=None).all()
+    return db_session.query(Checkout).filter(Checkout.returndate!=None).all()
 
 def checkout(outdate, who, hw, reason, quantity, user):
     c = Checkout(outdate=outdate, who=who, hardware=hw,
