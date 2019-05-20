@@ -2,10 +2,9 @@
 {% block title %}Checkout{% endblock %}
 
 {% block form %}
+<h3> {{ hw.name }} </h3>
 {{ rf(form.outdate) }}
 {{ rf(form.who) }}
-{# {{ rf(form.what) }} #}
 {{ rf(form.quantity) }}
 {{ rf(form.reason) }}
-{# {{ rf(form.authorized }} #}
 {% endblock %}

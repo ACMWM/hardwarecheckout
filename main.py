@@ -54,13 +54,17 @@ def delete(id):
 @app.route("/checkout/<id>/", methods=["GET", "POST"])
 def checkout(id):
     form = forms.Checkout()
+    try:
+        hw = sql.gethw(id)
+    except:
+        return "No such hardware!"
     if form.validate_on_submit():
         print("Checkout by "+form.who.data)
-        sql.checkout(form.outdate.data, form.who.data, None, form.reason.data,
+        sql.checkout(form.outdate.data, form.who.data, hw, form.reason.data,
                 form.quantity.data, None)
         return redirect(url_for("current"))
     else:
-        return render_template("outform.html", form=form)
+        return render_template("outform.html", form=form, hw=hw)
 
 @app.route("/show/<id>/")
 def show(id):
