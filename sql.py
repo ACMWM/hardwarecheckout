@@ -46,7 +46,6 @@ def search(keyword):
 
 def addhw(name, category, quantity):
     h = HW(name=name, category=category, quantity=quantity, available=quantity)
-    print(h)
     add(h)
 
 def current():
