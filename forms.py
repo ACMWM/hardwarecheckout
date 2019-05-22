@@ -18,8 +18,13 @@ class RemoveHW(FlaskForm):
         self.hw = hw
         self.delete.label.text += hw.name
 
-class UpdateHW(FlaskForm):
-    pass
+class UpdateHW(AddHW):
+    def sethw(self, hw):
+        self.hw = hw
+        self.name.default = hw.name
+        self.category.default = hw.category
+        self.quantity.default = hw.quantity
+        self.process()
 
 class Checkout(FlaskForm):
     outdate = DateTimeField("Date", validators=[DataRequired()],

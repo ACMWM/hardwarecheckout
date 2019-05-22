@@ -38,6 +38,22 @@ def add():
         return redirect(url_for("list"))
     return render_template("addhw.html", form=form)
 
+
+@app.route("/update/<id>/", methods=["GET", "POST"])
+def update(id):
+    hw = sql.gethw(id)
+    if hw is None:
+        return "No such Hardware!"
+    form = forms.UpdateHW()
+    form.sethw(hw)
+    if form.validate_on_submit():
+        form.populate_obj(hw)
+        if hw.quantity < hw.available:
+            hw.available = hw.quantity
+        sql.commit()
+        return redirect(url_for("list"))
+    return render_template("updatehw.html", form=form)
+
 @app.route("/delete/<id>/", methods=["GET", "POST"])
 def delete(id):
     hw = sql.gethw(int(id))
