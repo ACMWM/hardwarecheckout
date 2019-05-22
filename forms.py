@@ -40,6 +40,18 @@ class Checkout(FlaskForm):
         elif field.data > form.hw.available:
             raise ValidationError("Only "+str(form.hw.available)+" available!")
 
-class Checkin(FlaskForm):
-    pass
+class Return(FlaskForm):
+    returndate = DateTimeField("Date", validators=[DataRequired()],
+            default=datetime.now())
+    confirm = BooleanField("I Confirm that ", validators=[DataRequired()])
+    submit = SubmitField("Submit")
 
+    def setchk(self, chk):
+        self.chk = chk
+        self.confirm.label.text += (self.chk.hardware.name+" x"
+                ""+str(self.chk.quantity)+" have been returned to the"
+                " Hardware Lab.")
+
+    def validate_returndate(form, field):
+        if form.chk.outdate > field.data:
+            raise ValidationError("Cannot Return Hardware before it was checked out!")

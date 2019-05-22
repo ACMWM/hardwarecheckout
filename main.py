@@ -76,6 +76,24 @@ def checkout(id):
     else:
         return render_template("outform.html", form=form, hw=hw)
 
+@app.route("/return/<id>/", methods=["GET", "POST"])
+def Return(id):
+    form = forms.Return()
+    chk = sql.getchk(id)
+    if chk is None:
+        return "No such checkout!"
+    form.setchk(chk)
+    if chk.returndate != None:
+        flash("Already Returned!")
+        return redirect(url_for("list"))
+    if form.validate_on_submit():
+        chk.returndate = form.returndate.data
+        sql.commit()
+        return redirect(url_for("current"))
+    else:
+        return render_template("return.html", form=form)
+
+
 @app.route("/show/<id>/")
 def show(id):
     hw=sql.gethw(id)
