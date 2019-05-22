@@ -33,7 +33,7 @@ def login():
 def add():
     form = forms.AddHW()
     if form.validate_on_submit():
-        print("Adding "+form.name.data)
+        flash("Added "+form.name.data)
         sql.addhw(form.name.data, form.category.data, form.quantity.data)
         return redirect(url_for("list"))
     return render_template("addhw.html", form=form)
@@ -64,7 +64,7 @@ def checkout(id):
     except:
         return "No such hardware!"
     if form.validate_on_submit():
-        print("Checkout by "+form.who.data)
+        flash("Checkout of "+hw.name+" x"+str(form.quantity.data)+" by "+form.who.data)
         sql.checkout(form.outdate.data, form.who.data, hw, form.reason.data,
                 form.quantity.data, None)
         return redirect(url_for("current"))
@@ -74,7 +74,6 @@ def checkout(id):
 @app.route("/show/<id>/")
 def show(id):
     hw=sql.gethw(id)
-    print(hw)
     return render_template("hw.html", hw=hw)
 
 @app.route("/privacy")
