@@ -67,6 +67,7 @@ def checkout(id):
         flash("Checkout of "+hw.name+" x"+str(form.quantity.data)+" by "+form.who.data)
         sql.checkout(form.outdate.data, form.who.data, hw, form.reason.data,
                 form.quantity.data, None)
+        sql.updatehwavail(id, form.quantity.data)
         return redirect(url_for("current"))
     else:
         return render_template("outform.html", form=form, hw=hw)

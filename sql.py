@@ -40,6 +40,11 @@ def getuser(uid):
 def gethw(id):
     return db_session.query(HW).get(id)
 
+def updatehwavail(id, delta):
+    hw = gethw(id)
+    hw.available -= delta
+    commit()
+
 def search(keyword):
     if keyword is None:
         return db_session.query(HW)
