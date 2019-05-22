@@ -6,10 +6,13 @@ import google
 import sql
 import login
 import forms
+import prefix
 
 app = Flask(__name__)
 
-app.config["APPLICATION_ROOT"] = os.environ.get("BASEURL")
+baseurl = os.environ.get("BASEURL")
+if baseurl is not None:
+    app.wsgi_app = prefix.PrefixMiddleware(app.wsgi_app, prefix=baseurl)
 
 app.secret_key=os.environ.get("SECRET_KEY") or os.urandom(16)
 app.register_blueprint(google.bp, url_prefix="/login")
