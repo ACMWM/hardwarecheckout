@@ -18,13 +18,6 @@ sql.init_db()
 def shutdown_session(exception=None):
     sql.db_session.remove()
 
-@app.route("/")
-def hello():
-    if google.loggedin():
-        user = google.userinfo()
-        print("LOGGED IN "+user['email'])
-    return render_template("index.html")
-
 @app.route("/auth")
 def login():
     return redirect(url_for("google.login"))
@@ -124,8 +117,8 @@ use your email to confirm you are authorized to check out hardware for the
 William and Mary ACM.
 """
 
-@app.route("/list/")
-@app.route("/list/<keyword>")
+@app.route("/")
+@app.route("/search/<keyword>/")
 def list(keyword=None):
     s = sql.search(keyword)
     return render_template("list.html", objs=s)
