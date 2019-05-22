@@ -23,7 +23,7 @@ class UpdateHW(FlaskForm):
 
 class Checkout(FlaskForm):
     outdate = DateTimeField("Date", validators=[DataRequired()],
-            default=datetime.now())
+            default=datetime.now)
     who = StringField("Who", validators=[DataRequired()])
     #what =
     reason = StringField("Reason")
@@ -42,7 +42,7 @@ class Checkout(FlaskForm):
 
 class Return(FlaskForm):
     returndate = DateTimeField("Date", validators=[DataRequired()],
-            default=datetime.now())
+            default=datetime.now)
     confirm = BooleanField("I Confirm that ", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
