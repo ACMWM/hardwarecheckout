@@ -11,6 +11,10 @@ class AddHW(FlaskForm):
     quantity = IntegerField("Quantity", validators=[DataRequired()])
     submit = SubmitField("Submit")
 
+    def validate_quantity(form, field):
+        if field.data < 1:
+            raise ValidationError("Must have at least one!")
+
 class RemoveHW(FlaskForm):
     submit = SubmitField("Submit")
     delete = BooleanField("I want to delete ")
