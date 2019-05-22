@@ -40,23 +40,21 @@ def add():
 
 @app.route("/delete/<id>/", methods=["GET", "POST"])
 def delete(id):
-    err = "No such id."
-    try:
-        hw = sql.gethw(int(id))
-        form = forms.RemoveHW()
-        form.sethw(hw)
-        if hw is None:
-            return err
-        if form.validate_on_submit():
-            hw.quantity = 0
-            hw.available = 0
-            sql.commit()
-            flash("Deleted "+hw.name)
-            return redirect(url_for("list"))
-        else:
-            return render_template("delhw.html", form=form)
-    except ValueError:
+    hw = sql.gethw(int(id))
+    if hw is None:
+        return "No such id."
+    form = forms.RemoveHW()
+    form.sethw(hw)
+    if hw is None:
         return err
+    if form.validate_on_submit():
+        hw.quantity = 0
+        hw.available = 0
+        sql.commit()
+        flash("Deleted "+hw.name)
+        return redirect(url_for("list"))
+    else:
+        return render_template("delhw.html", form=form)
 
 @app.route("/checkout/<id>/", methods=["GET", "POST"])
 def checkout(id):
