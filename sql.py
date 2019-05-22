@@ -31,8 +31,7 @@ def delete(obj):
     commit()
 
 def checkemail(email):
-    print(db_session.query(User).filterby(email=email))
-    return True
+    return db_session.query(User).filterby(email=email).first()
 
 def getuser(uid):
     return db_session.query(User).get(uid)
