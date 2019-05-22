@@ -8,14 +8,17 @@
 <nav>
   <h1>Hardware</h1>
   <ul class='navlist'>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('google.logout') }}">Log Out</a>
+    {% if current_user.is_authenticated %}
+	<li><span>{{ current_user.name }}</span></li>
+	<li><a href="{{ url_for('google.logout') }}">Log Out</a></li>
     {% else %}
-      <li><a href="{{ url_for('google.login') }}">Log In</a>
+	<li><a href="{{ url_for('google.login') }}">Log In</a></li>
     {% endif %}
-	<li><a href="{{ url_for('list') }}">Hardware List</a>
+	<li><a href="{{ url_for('newuser') }}">Add User</a></li>
+	<br>
+	<li><a href="{{ url_for('list') }}">Hardware List</a></li>
 	<li><a href="{{ url_for('add') }}">Add Hardware</a></li>
+	<br>
 	<li><a href="{{ url_for('current') }}">Currently Out</a></li>
 	<li><a href="{{ url_for('history') }}">History</a></li>
   </ul>
