@@ -1,6 +1,6 @@
 #!/bin/sh
 . bin/activate
-. .env
+. ./.env
 
 pip install -r requirements.txt
 gunicorn main:app
