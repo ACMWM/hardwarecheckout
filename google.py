@@ -5,6 +5,7 @@ import requests
 import os
 
 import auth
+import login
 
 bp = make_google_blueprint(
     client_id=os.environ.get("GOOGLE_OAUTH_CLIENT_ID"),
@@ -35,6 +36,7 @@ def check_hosted_domain_and_email(blueprint, token):
         )
         session.clear()
         abort(403)
-    if auth.checkemail(user['email']):
+    lguser = auth.checkemail(user['email'])
+    if lguser is not None:
         print("VALID EMAIL "+user['email'])
-        session['user'] = user['email']
+        login.login_user(lguser)
