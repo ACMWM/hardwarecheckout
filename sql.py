@@ -45,6 +45,9 @@ def updatehwavail(id, delta):
     hw.available -= delta
     commit()
 
+def getchk(id):
+    return db_session.query(Checkout).get(id)
+
 def search(keyword):
     if keyword is None:
         return db_session.query(HW)
