@@ -15,7 +15,6 @@ Base.query = db_session.query_property()
 from models import HW, User, Checkout
 
 def init_db():
-    import models
     #import oauthdb
     #oauthdb.storage(db_session)
     Base.metadata.create_all(bind=engine, checkfirst=True)
