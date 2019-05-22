@@ -5,4 +5,4 @@ cd "$(dirname "$0")"
 . ./.env
 
 pip install -r requirements.txt
-exec gunicorn main:app --log-file=-
+exec gunicorn main:app --log-file=- --access-logfile=- --capture-output
