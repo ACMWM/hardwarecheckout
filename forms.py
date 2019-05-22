@@ -2,7 +2,7 @@ from datetime import datetime
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, IntegerField, SubmitField
 from wtforms.fields.html5 import DateTimeField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, ValidationError
 
 
 class AddHW(FlaskForm):
@@ -30,6 +30,15 @@ class Checkout(FlaskForm):
     quantity = IntegerField("Quantity", validators=[DataRequired()])
     #authorized =
     submit = SubmitField("Checkout")
+
+    def sethw(self, hw):
+        self.hw = hw
+
+    def validate_quantity(form, field):
+        if field.data < 1:
+            raise ValidationError("Must check out at least one!")
+        elif field.data > form.hw.available:
+            raise ValidationError("Only "+str(form.hw.available)+" available!")
 
 class Checkin(FlaskForm):
     pass
