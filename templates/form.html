@@ -8,13 +8,8 @@
 	{% block form %}{% endblock %}
 	<div>{{ form.submit() }}</div>
 </form>
-{% if form.errors %}
-	{% for _,e in form.errors.items() %}
-		<div>
-			{% for l in e %}
-				{{ l }}
-			{% endfor %}
-		</div>
-	{% endfor %}
+{% if form.errors['csrf_token'] %}
+<p class="flash">Your copy of this form is out-of-date.
+Please submit again.</p>
 {% endif %}
 {% endblock %}
