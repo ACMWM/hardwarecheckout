@@ -61,6 +61,10 @@ def checkout(id):
     form = forms.Checkout()
     try:
         hw = sql.gethw(id)
+        form.sethw(hw)
+        if hw.available < 1:
+            flash("No "+hw.name+" available to checkout!")
+            return redirect(url_for("list"))
     except:
         return "No such hardware!"
     if form.validate_on_submit():
