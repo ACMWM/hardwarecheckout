@@ -98,6 +98,8 @@ def Return(id):
 @app.route("/show/<id>/")
 def show(id):
     hw=sql.gethw(id)
+    if hw is None:
+        return "No such hardware!"
     return render_template("hw.html", hw=hw)
 
 @app.route("/privacy")
