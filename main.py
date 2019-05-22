@@ -8,6 +8,9 @@ import login
 import forms
 
 app = Flask(__name__)
+
+app.config["APPLICATION_ROOT"] = os.environ.get("BASEURL")
+
 app.secret_key=os.environ.get("SECRET_KEY") or os.urandom(16)
 app.register_blueprint(google.bp, url_prefix="/login")
 login.init(app)
