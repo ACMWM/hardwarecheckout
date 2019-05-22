@@ -3,4 +3,4 @@
 . ./.env
 
 pip install -r requirements.txt
-gunicorn main:app
+gunicorn main:app --log-file=-
