@@ -88,6 +88,7 @@ def Return(id):
         return redirect(url_for("list"))
     if form.validate_on_submit():
         chk.returndate = form.returndate.data
+        chk.hardware.available += chk.quantity
         sql.commit()
         return redirect(url_for("current"))
     else:
