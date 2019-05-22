@@ -24,11 +24,16 @@ class Checkout(Base):
     outdate = Column(DateTime)
     returndate = Column(DateTime)
     who = Column(String)
-    what = Column(Integer, ForeignKey(HW.id))
-    hardware = relationship(HW)
     reason = Column(String)
     quantity = Column(Integer)
+
+    what = Column(Integer, ForeignKey(HW.id))
+    hardware = relationship(HW, foreign_keys=[what])
+
+    out_auth_id = Column(Integer, ForeignKey(User.id))
     out_auth_email = Column(String, ForeignKey(User.email))
-    out_auth_user = relationship(User, foreign_keys=[out_auth_email])
+    out_auth_user = relationship(User, foreign_keys=[out_auth_id, out_auth_email])
+
+    in_auth_id = Column(Integer, ForeignKey(User.id))
     in_auth_email = Column(String, ForeignKey(User.email))
-    in_auth_user = relationship(User, foreign_keys=[in_auth_email])
+    in_auth_user = relationship(User, foreign_keys=[in_auth_id, in_auth_email])
