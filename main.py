@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, url_for, redirect, render_template
+from flask import Flask, url_for, redirect, render_template, flash
 import os
 
 import google
@@ -38,16 +38,21 @@ def add():
         return redirect(url_for("list"))
     return render_template("addhw.html", form=form)
 
-@app.route("/delete/<id>/")
+@app.route("/delete/<id>/", methods=["GET", "POST"])
 def delete(id):
     err = "No such id."
     try:
         hw = sql.gethw(int(id))
-        if hw is not None:
-            sql.delete(hw)
-            return hw.name+" Deleted."
-        else:
+        form = forms.RemoveHW()
+        form.sethw(hw)
+        if hw is None:
             return err
+        if form.validate_on_submit():
+            sql.delete(hw)
+            flash("Deleted "+hw.name)
+            return redirect(url_for("list"))
+        else:
+            return render_template("delhw.html", form=form)
     except ValueError:
         return err
 

@@ -12,7 +12,11 @@ class AddHW(FlaskForm):
     submit = SubmitField("Submit")
 
 class RemoveHW(FlaskForm):
-    pass
+    submit = SubmitField("Submit")
+    delete = BooleanField("I want to delete ")
+    def sethw(self, hw):
+        self.hw = hw
+        self.delete.label.text += hw.name
 
 class UpdateHW(FlaskForm):
     pass
