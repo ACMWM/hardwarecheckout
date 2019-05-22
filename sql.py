@@ -61,3 +61,10 @@ def checkout(outdate, who, hw, reason, quantity, user):
             )
             #in_auth_email=user.email)
     add(c)
+
+def Return(chk, user, date):
+    chk.returndate = date
+    chk.hardware.available += chk.quantity
+    chk.in_user_auth = user
+    #chk.in_user_email = user.email
+    commit()

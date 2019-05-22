@@ -103,9 +103,7 @@ def Return(id):
         flash("Already Returned!")
         return redirect(url_for("list"))
     if form.validate_on_submit():
-        chk.returndate = form.returndate.data
-        chk.hardware.available += chk.quantity
-        sql.commit()
+        sql.Return(chk, None, form.returndate.data)
         return redirect(url_for("current"))
     else:
         return render_template("return.html", form=form)
