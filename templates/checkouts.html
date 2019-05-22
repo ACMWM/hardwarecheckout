@@ -20,7 +20,15 @@
 				{{ r.hardware.name }}</a> </td>
 		<td> {{ r.quantity }} </td>
 		<td> {{ r.reason }} </td>
-		<td> {{ r.authorized_user.name }} </td>
+		<td>
+			{% if r.out_auth_user %}
+			Out: {{ r.out_auth_user.name }}
+			{% endif %}
+			{% if r.in_auth_user %}
+			<br>
+			In: {{ r.in_auth_user.name }}
+			{% endif %}
+		</td>
 		<td>
 			{% if r.returndate != None %}
 			{{ r.returndate }} </td>
