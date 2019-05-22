@@ -4,8 +4,7 @@ import sql
 
 domain = "email.wm.edu"
 
-def checkemail(email):
-    return sql.checkemail()
+checkemail = sql.checkemail
 
 _email = compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
