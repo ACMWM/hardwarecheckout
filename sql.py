@@ -17,7 +17,7 @@ def init_db():
     import models
     #import oauthdb
     #oauthdb.storage(db_session)
-    Base.metadata.create_all(bind=engine)
+    Base.metadata.create_all(bind=engine, checkfirst=True)
 
 def commit():
     db_session.commit()
