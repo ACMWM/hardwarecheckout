@@ -1,7 +1,7 @@
-flask
-flask-dance[sqla]
-sqlalchemy
+flask ~= 1.0.2
+flask-dance[sqla] ~= 2.0.0
+sqlalchemy ~= 1.3.3
 blinker
 gunicorn
-flask-login
-flask-wtf
+flask-login ~= 0.4.1
+flask-wtf ~= 0.14.2
