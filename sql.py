@@ -28,6 +28,7 @@ def add(obj):
 
 def delete(obj):
     db_session.delete(obj)
+    commit()
 
 def checkemail(email):
     print(db_session.query(User).filterby(email=email))
