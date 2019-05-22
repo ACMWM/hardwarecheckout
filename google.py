@@ -11,7 +11,7 @@ bp = make_google_blueprint(
     client_id=os.environ.get("GOOGLE_OAUTH_CLIENT_ID"),
     client_secret=os.environ.get("GOOGLE_OAUTH_CLIENT_SECRET"),
     scope=["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"],
-    hosted_domain="email.wm.edu"
+    hosted_domain=auth.domain
 )
 
 def setstorage(s):
