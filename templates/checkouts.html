@@ -5,22 +5,28 @@
 <table>
 	<tr>
 		<th>Out</th>
-		<th>In</th>
 		<th>Who</th>
 		<th>What</th>
 		<th>Quantity</th>
 		<th>Reason</th>
 		<th>Authorized</th>
+		<th>Return</th>
 	</tr>
 {% for r in rows %}
 	<tr>
 		<td> {{ r.outdate }} </td>
-		<td> {{ r.returndate }} </td>
 		<td> {{ r.who }} </td>
 		<td> <a href="/show/{{ r.what }}">{{ r.hardware.name }}</a> </td>
 		<td> {{ r.quantity }} </td>
 		<td> {{ r.reason }} </td>
 		<td> {{ r.authorized_user.name }} </td>
+		<td>
+			{% if r.returndate != None %}
+			{{ r.returndate }} </td>
+			{% else %}
+			<a href="/return/{{ r.id }}">Return</a>
+			{% endif %}
+		</td>
 	</tr>
 {% endfor %}
 {% endblock %}
