@@ -4,6 +4,8 @@ from wtforms import StringField, BooleanField, IntegerField, SubmitField
 from wtforms.fields.html5 import DateTimeField
 from wtforms.validators import DataRequired, ValidationError
 
+import auth
+
 
 class AddHW(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
@@ -64,3 +66,12 @@ class Return(FlaskForm):
     def validate_returndate(form, field):
         if form.chk.outdate > field.data:
             raise ValidationError("Cannot Return Hardware before it was checked out!")
+
+class NewUser(FlaskForm):
+    email = StringField("Email")
+    submit = SubmitField()
+
+    def validate_email(form, field):
+        field.data += "@"+auth.domain
+        if auth.validemail(field.data) is None:
+            raise ValidationError("Must be a valid email!")

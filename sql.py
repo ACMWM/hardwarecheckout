@@ -29,6 +29,9 @@ def add(obj):
 def checkemail(email):
     return db_session.query(User).filterby(email=email).first()
 
+def newuser(email):
+    add(User(email=email))
+
 def getuser(uid):
     return db_session.query(User).get(uid)
 

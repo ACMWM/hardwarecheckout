@@ -101,13 +101,21 @@ def Return(id):
     else:
         return render_template("return.html", form=form)
 
-
 @app.route("/show/<id>/")
 def show(id):
     hw=sql.gethw(id)
     if hw is None:
         return "No such hardware!"
     return render_template("hw.html", hw=hw)
+
+@app.route("/newuser/", methods=["GET", "POST"])
+def newuser():
+    form = forms.NewUser()
+    if form.validate_on_submit():
+        sql.newuser(form.email.data)
+        flash("Added "+form.email.data)
+        return redirect(url_for("list"))
+    return render_template("newuser.html", form=form)
 
 @app.route("/privacy")
 def private():
