@@ -17,8 +17,8 @@
 			<td> {{ i.name }} </td>
 			<td> {{ i.available }} </td>
 			<td> {{ i.quantity }} </td>
-			<td> <a href="/checkout/{{ i.id }}/">Checkout</a> </td>
-			<td><a href="/update/{{ i.id }}/">Update</a> </td>
+			<td> <a href="{{ url_for('checkout', id=i.id) }}">Checkout</a> </td>
+			<td><a href="{{ url_for('update', id=i.id) }}">Update</a> </td>
 		</tr>
 		{% endif %}
 	{% endfor %}

@@ -16,7 +16,8 @@
 	<tr>
 		<td> {{ r.outdate }} </td>
 		<td> {{ r.who }} </td>
-		<td> <a href="/show/{{ r.what }}">{{ r.hardware.name }}</a> </td>
+		<td> <a href="{{ url_for('show', id=r.id) }}">
+				{{ r.hardware.name }}</a> </td>
 		<td> {{ r.quantity }} </td>
 		<td> {{ r.reason }} </td>
 		<td> {{ r.authorized_user.name }} </td>
@@ -24,7 +25,7 @@
 			{% if r.returndate != None %}
 			{{ r.returndate }} </td>
 			{% else %}
-			<a href="/return/{{ r.id }}">Return</a>
+			<a href="{{ url_for('Return', id=r.id) }}">Return</a>
 			{% endif %}
 		</td>
 	</tr>
