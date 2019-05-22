@@ -29,6 +29,6 @@ class Checkout(Base):
     reason = Column(String)
     quantity = Column(Integer)
     out_auth_email = Column(String, ForeignKey(User.email))
-    out_auth_user = relationship(User)
+    out_auth_user = relationship(User, foreign_keys=[out_auth_email])
     in_auth_email = Column(String, ForeignKey(User.email))
-    in_auth_user = relationship(User)
+    in_auth_user = relationship(User, foreign_keys=[in_auth_email])
