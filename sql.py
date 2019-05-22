@@ -1,9 +1,9 @@
-db = "sqlite:///test.db"
-
 from os import environ
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+
+db = environ.get("DATABASE_URL") or "sqlite:///test.db"
 
 engine = create_engine(db, convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
@@ -15,7 +15,6 @@ Base.query = db_session.query_property()
 from models import HW, User, Checkout
 
 def init_db():
-    db = environ.get("DATABASE_URL") or db
     import models
     #import oauthdb
     #oauthdb.storage(db_session)
