@@ -48,7 +48,9 @@ def delete(id):
         if hw is None:
             return err
         if form.validate_on_submit():
-            sql.delete(hw)
+            hw.quantity = 0
+            hw.available = 0
+            sql.commit()
             flash("Deleted "+hw.name)
             return redirect(url_for("list"))
         else:
