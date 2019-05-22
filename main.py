@@ -59,14 +59,13 @@ def delete(id):
 @app.route("/checkout/<id>/", methods=["GET", "POST"])
 def checkout(id):
     form = forms.Checkout()
-    try:
-        hw = sql.gethw(id)
-        form.sethw(hw)
-        if hw.available < 1:
-            flash("No "+hw.name+" available to checkout!")
-            return redirect(url_for("list"))
-    except:
+    hw = sql.gethw(id)
+    if hw is None:
         return "No such hardware!"
+    form.sethw(hw)
+    if hw.available < 1:
+        flash("No "+hw.name+" available to checkout!")
+        return redirect(url_for("list"))
     if form.validate_on_submit():
         flash("Checkout of "+hw.name+" x"+str(form.quantity.data)+" by "+form.who.data)
         sql.checkout(form.outdate.data, form.who.data, hw, form.reason.data,
