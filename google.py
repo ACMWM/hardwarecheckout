@@ -40,3 +40,5 @@ def check_hosted_domain_and_email(blueprint, token):
     if lguser is not None:
         print("VALID EMAIL "+user['email'])
         login.login_user(lguser)
+    else:
+        print("INVALID EMAIL "+user['email'])
