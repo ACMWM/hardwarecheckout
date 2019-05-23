@@ -42,10 +42,11 @@ def getchk(id):
     return db_session.query(Checkout).get(id)
 
 def search(keyword):
+    q = db_session.query(HW).order_by(HW.category)
     if keyword is None:
-        return db_session.query(HW)
+        return q
     else:
-        return db_session.query(HW).filter(HW.name.like('%'+keyword+'%'))
+        return q.filter(HW.name.like('%'+keyword+'%'))
 
 def addhw(name, category, quantity):
     h = HW(name=name, category=category, quantity=quantity, available=quantity)
