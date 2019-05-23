@@ -11,14 +11,14 @@
     {% if current_user.is_authenticated %}
 	<li><span>{{ current_user.name }}</span></li>
 	<li><a href="{{ url_for('LogOut') }}">Log Out</a></li>
+	<br>
+	<li><a href="{{ url_for('newuser') }}">Add User</a></li>
+	<li><a href="{{ url_for('add') }}">Add Hardware</a></li>
     {% else %}
 	<li><a href="{{ url_for('LogIn') }}">Log In</a></li>
     {% endif %}
-	<li><a href="{{ url_for('newuser') }}">Add User</a></li>
 	<br>
 	<li><a href="{{ url_for('list') }}">Hardware List</a></li>
-	<li><a href="{{ url_for('add') }}">Add Hardware</a></li>
-	<br>
 	<li><a href="{{ url_for('current') }}">Currently Out</a></li>
 	<li><a href="{{ url_for('history') }}">History</a></li>
   </ul>
