@@ -27,19 +27,19 @@ def userinfo():
 @oauth_authorized.connect_via(bp)
 def check_hosted_domain_and_email(blueprint, token):
     user = userinfo()
-    if user["hd"] != blueprint.authorization_url_params["hd"]:
-        print("HOSTED DOMAIN ERROR: "+user["hd"])
+    lguser = auth.checkemail(user['email'])
+    if lguser is None:
+        flash("Unauthorized user "+user['email'])
+        if user["hd"] != blueprint.authorization_url_params["hd"]:
+            print("HOSTED DOMAIN ERROR: "+user["hd"])
         requests.post(
             "https://accounts.google.com/o/oauth2/revoke",
             params={"token": token["access_token"]}
         )
         session.clear()
         abort(403)
-    lguser = auth.checkemail(user['email'])
-    if lguser is not None:
+    else:
         flash("Logged in "+user['email'])
         if lguser.name is None:
             auth.setname(lguser, user['name'])
         auth.login_user(lguser)
-    else:
-        flash("Invalid email "+user['email'])
