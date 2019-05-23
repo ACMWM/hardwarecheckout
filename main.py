@@ -24,7 +24,7 @@ sql.init_db()
 def shutdown_session(exception=None):
     sql.db_session.remove()
 
-@app.route("/auth")
+@app.route("/auth/")
 def login():
     return redirect(url_for("google.login"))
 
@@ -123,7 +123,7 @@ def newuser():
         return redirect(url_for("list"))
     return render_template("newuser.html", form=form)
 
-@app.route("/privacy")
+@app.route("/privacy/")
 def private():
     return """
 We hereby promise never to ever do anything with your information except
