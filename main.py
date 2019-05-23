@@ -34,6 +34,7 @@ def LogOut():
     return redirect(url_for("list"))
 
 @app.route("/add/", methods=["GET", "POST"])
+@login.login_required
 def add():
     form = forms.AddHW()
     if form.validate_on_submit():
@@ -44,6 +45,7 @@ def add():
 
 
 @app.route("/update/<id>/", methods=["GET", "POST"])
+@login.login_required
 def update(id):
     hw = sql.gethw(id)
     if hw is None:
@@ -59,6 +61,7 @@ def update(id):
     return render_template("updatehw.html", form=form)
 
 @app.route("/delete/<id>/", methods=["GET", "POST"])
+@login.login_required
 def delete(id):
     hw = sql.gethw(int(id))
     if hw is None:
@@ -77,6 +80,7 @@ def delete(id):
         return render_template("delhw.html", form=form)
 
 @app.route("/checkout/<id>/", methods=["GET", "POST"])
+@login.login_required
 def checkout(id):
     form = forms.Checkout()
     hw = sql.gethw(id)
@@ -97,6 +101,7 @@ def checkout(id):
         return render_template("outform.html", form=form, hw=hw)
 
 @app.route("/return/<id>/", methods=["GET", "POST"])
+@login.login_required
 def Return(id):
     form = forms.Return()
     chk = sql.getchk(id)
@@ -120,6 +125,7 @@ def show(id):
     return render_template("hw.html", hw=hw)
 
 @app.route("/newuser/", methods=["GET", "POST"])
+@login.login_required
 def newuser():
     form = forms.NewUser()
     if form.validate_on_submit():
