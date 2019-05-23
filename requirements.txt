@@ -6,4 +6,4 @@ blinker
 gunicorn
 flask-login ~= 0.4.1
 flask-wtf ~= 0.14.2
-jinja >= 2.10
+jinja2 >= 2.10
