@@ -14,7 +14,7 @@
 		{% if i.quantity > 0 %}
 		<tr>
 			<!-- id: {{ i.id }} -->
-			<td> {{ i.name }} </td>
+			<td> <a href="{{ url_for("show", id=i.id) }}">{{ i.name }}</a></td>
 			<td> {{ i.quantity }} </td>
 			<td> {{ i.available }} </td>
 			<td> <a href="{{ url_for('checkout', id=i.id) }}">Checkout</a> </td>
