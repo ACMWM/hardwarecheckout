@@ -25,11 +25,11 @@ def shutdown_session(exception=None):
     sql.db_session.remove()
 
 @app.route("/login/")
-def LogIn():
+def login():
     return redirect(url_for("google.login"))
 
 @app.route("/logout/")
-def LogOut():
+def logout():
     auth.logout_user()
     return redirect(url_for("list"))
 
