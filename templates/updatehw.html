@@ -1,9 +1,6 @@
-{% extends "form.html" %}
+{% extends "addhw.html" %}
 {% block title %}Update Hardware: {{ form.hw.name }} {% endblock %}
 
-{% block form %}
+{% block update %}
 <a href="{{ url_for('delete', id=form.hw.id) }}">Delete</a>
-{{ rf(form.name) }}
-{{ rf(form.category) }}
-{{ rf(form.quantity) }}
 {% endblock %}
