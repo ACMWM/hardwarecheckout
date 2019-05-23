@@ -11,6 +11,8 @@
 {% if form.errors['csrf_token'] %}
 <p class="flash">Your copy of this form is out-of-date.
 Please submit again.</p>
-<p>{{ form.errors['csrf_token'] }}</p>
+{% for e in form.errors['csrf_token'] %}
+<p>{{ e }}</p>
+{% endfor %}
 {% endif %}
 {% endblock %}
