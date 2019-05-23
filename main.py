@@ -24,9 +24,14 @@ sql.init_db()
 def shutdown_session(exception=None):
     sql.db_session.remove()
 
-@app.route("/auth/")
+@app.route("/login/")
 def login():
     return redirect(url_for("google.login"))
+
+@app.route("/logout/")
+def logout():
+    login.logout_user()
+    return redirect(url_for("list"))
 
 @app.route("/add/", methods=["GET", "POST"])
 def add():
