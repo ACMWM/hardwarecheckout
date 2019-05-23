@@ -18,11 +18,11 @@
 <table>
 	{% set ns = namespace(oldcat=None) %}
 	{% for i in objs %}
+		{% if i.quantity > 0 %}
 		{% if ns.oldcat != i.category %}
 			{% set ns.oldcat = i.category %}
 			{{ header(i.category) }}
 		{% endif %}
-		{% if i.quantity > 0 %}
 		<tr>
 			<!-- id: {{ i.id }} -->
 			<td> <a href="{{ url_for("show", id=i.id) }}">{{ i.name }}</a></td>
