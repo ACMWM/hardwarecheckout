@@ -51,8 +51,8 @@ def update(id):
     hw = sql.gethw(id)
     if hw is None:
         return render_template("error.html", msg="No such Hardware!")
-    form = forms.UpdateHW()
-    form.sethw(hw)
+    form = forms.AddHW()
+    form.updatehw(hw)
     if form.validate_on_submit():
         form.populate_obj(hw)
         if hw.quantity < hw.available:
