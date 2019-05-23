@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 
-{# Render Field in Form #}
-{% macro rf(field) %}
-  <div>
-	{{ field.label }}
-	{{ field(**kwargs)|safe }}
-	{% if field.errors %}
+{% macro ferrors(field) %}
+{% if field.errors %}
 		<ul class=errors>
 			{% for error in field.errors %}
 				<li>{{ error }}</li>
 			{% endfor %}
 		</ul>
 	{% endif %}
+{% endmacro %}
+
+{# Render Field in Form #}
+{# http://flask.pocoo.org/docs/0.12/patterns/wtforms/ #}
+{% macro rf(field) %}
+  <div>
+	{{ field.label }}
+	{{ field(**kwargs)|safe }}
+	{{ ferrors(field) }}
   </div>
 {% endmacro %}
 
