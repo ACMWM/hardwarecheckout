@@ -2,21 +2,25 @@
 
 {% block title %}List{% endblock %}
 
+{% macro header(cat) %}
+<tr class="catrow">
+	<th>{{ cat }}</th>
+</tr>
+<tr>
+	<th>Name</th>
+	<th>Quantity</th>
+	<th>Available</th>
+</tr>
+{% endmacro %}
+
 {% block content %}
 {% if objs %}
 <table>
-	<tr>
-		<th>Name</th>
-		<th>Quantity</th>
-		<th>Available</th>
-	</tr>
 	{% set ns = namespace(oldcat=None) %}
 	{% for i in objs %}
 		{% if ns.oldcat != i.category %}
 			{% set ns.oldcat = i.category %}
-			<tr>
-				<th>{{ i.category }}</th>
-			</tr>
+			{{ header(i.category) }}
 		{% endif %}
 		{% if i.quantity > 0 %}
 		<tr>
