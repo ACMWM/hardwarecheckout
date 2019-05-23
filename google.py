@@ -1,4 +1,4 @@
-from flask import session, abort
+from flask import flash, abort
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import make_google_blueprint, google
 import requests
@@ -38,7 +38,7 @@ def check_hosted_domain_and_email(blueprint, token):
         abort(403)
     lguser = auth.checkemail(user['email'])
     if lguser is not None:
-        print("VALID EMAIL "+user['email'])
+        flash("Logged in "+user['email'])
         login.login_user(lguser)
     else:
-        print("INVALID EMAIL "+user['email'])
+        flash("Invalid email "+user['email'])
