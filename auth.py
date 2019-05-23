@@ -19,8 +19,9 @@ def load_user(user_id):
     return sql.getuser(user_id)
 
 manager = None
-def init(app):
+def init(app, view):
     global manager
     manager = LoginManager()
     manager.init_app(app)
     manager.user_loader(load_user)
+    manager.login_view = view

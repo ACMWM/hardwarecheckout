@@ -16,7 +16,8 @@ if baseurl is not None:
 
 app.secret_key=os.environ.get("SECRET_KEY") or os.urandom(16)
 app.register_blueprint(google.bp, url_prefix="/login")
-auth.init(app)
+
+auth.init(app, "login")
 
 sql.init_db()
 
