@@ -51,6 +51,9 @@ def addhw(name, category, quantity):
     h = HW(name=name, category=category, quantity=quantity, available=quantity)
     add(h)
 
+def categories():
+    return db_session.query(HW.category).distinct()
+
 def current():
     return db_session.query(Checkout).filter(Checkout.returndate==None).all()
 

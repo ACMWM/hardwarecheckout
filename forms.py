@@ -9,7 +9,7 @@ import auth
 
 class AddHW(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
-    category = StringField("Category")
+    category = StringField("Category", render_kw={"list": "categories"})
     quantity = IntegerField("Quantity", validators=[DataRequired()])
     submit = SubmitField("Submit")
 

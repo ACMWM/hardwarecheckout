@@ -42,7 +42,7 @@ def add():
         flash("Added "+form.name.data)
         sql.addhw(form.name.data, form.category.data, form.quantity.data)
         return redirect(url_for("list"))
-    return render_template("addhw.html", form=form)
+    return render_template("addhw.html", form=form, cat=sql.categories())
 
 
 @app.route("/update/<id>/", methods=["GET", "POST"])
@@ -59,7 +59,7 @@ def update(id):
         sql.commit()
         return redirect(url_for("list"))
     form.sethw(hw)
-    return render_template("updatehw.html", form=form)
+    return render_template("updatehw.html", form=form, cat=sql.categories())
 
 @app.route("/delete/<id>/", methods=["GET", "POST"])
 @auth.login_required

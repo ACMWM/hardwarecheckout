@@ -6,4 +6,9 @@
 {{ rf(form.name) }}
 {{ rf(form.quantity) }}
 {{ rf(form.category) }}
+<datalist id="categories">
+	{% for c in cat %}
+		<option value="{{ c }}">
+	{% endfor %}
+</datalist>
 {% endblock %}
