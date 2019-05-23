@@ -8,7 +8,7 @@
 {{ rf(form.category) }}
 <datalist id="categories">
 	{% for c in cat %}
-		<option value="{{ c }}">
+		<option value="{{ c[0] }}">
 	{% endfor %}
 </datalist>
 {% endblock %}
