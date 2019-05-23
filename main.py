@@ -123,7 +123,7 @@ def show(id):
     hw=sql.gethw(id)
     if hw is None:
         return render_template("error.html", msg="No such hardware!")
-    return render_template("hw.html", hw=hw)
+    return render_template("show.html", hw=hw)
 
 @app.route("/newuser/", methods=["GET", "POST"])
 @auth.login_required
