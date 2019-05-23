@@ -1,6 +1,6 @@
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from re import compile
-from main import sql
+import sql
 
 domain = "email.wm.edu"
 
