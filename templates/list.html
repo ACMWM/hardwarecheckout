@@ -12,7 +12,7 @@
 	</tr>
 	{% set oldcat = None %}
 	{% for i in objs %}
-		{% if oldcat != i.category %}
+		{% if oldcat|string() != i.category|string() %}
 			{% set oldcat = i.category %}
 			<tr>
 				<th>{{ i.category }}</th>
