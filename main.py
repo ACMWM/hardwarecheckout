@@ -93,7 +93,7 @@ def checkout(id):
     if form.validate_on_submit():
         flash("Checkout of "+hw.name+" x"+str(form.quantity.data)+" by "+form.who.data)
         sql.checkout(form.outdate.data, form.who.data, hw, form.reason.data,
-                form.quantity.data, current_user)
+                form.quantity.data, login.current_user)
         hw.available -= form.quantity.data
         sql.commit()
         return redirect(url_for("current"))
@@ -112,7 +112,7 @@ def Return(id):
         flash("Already Returned!")
         return redirect(url_for("list"))
     if form.validate_on_submit():
-        sql.Return(chk, current_user, form.returndate.data)
+        sql.Return(chk, login.current_user, form.returndate.data)
         return redirect(url_for("current"))
     else:
         return render_template("return.html", form=form)
