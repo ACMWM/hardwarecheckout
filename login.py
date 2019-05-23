@@ -1,4 +1,4 @@
-from flask_login import LoginManager, current_user, login_user
+from flask_login import LoginManager, current_user, login_user, logout_user
 from sql import getuser
 
 manager = LoginManager()
