@@ -10,7 +10,14 @@
 		<th>Quantity</th>
 		<th>Available</th>
 	</tr>
+	{% set oldcat = None %}
 	{% for i in objs %}
+		{% if oldcat != i.category %}
+			{% set oldcat = i.category %}
+			<tr>
+				<th>{{ i.category }}</th>
+			</tr>
+		{% endif %}
 		{% if i.quantity > 0 %}
 		<tr>
 			<!-- id: {{ i.id }} -->
