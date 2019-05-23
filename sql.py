@@ -59,8 +59,8 @@ def history():
 
 def checkout(outdate, who, hw, reason, quantity, user):
     c = Checkout(outdate=outdate, who=who, hardware=hw,
-            what=hw.id, reason=reason, quantity=quantity, in_auth_user=user,
-            in_auth_email=user.email)
+            what=hw.id, reason=reason, quantity=quantity, out_auth_user=user,
+            out_auth_email=user.email)
     add(c)
 
 def Return(chk, user, date):
