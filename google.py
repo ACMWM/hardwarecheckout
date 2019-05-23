@@ -1,4 +1,4 @@
-from flask import flash, abort
+from flask import flash, abort, session
 from flask_dance.consumer import oauth_authorized
 from flask_dance.contrib.google import make_google_blueprint, google
 import requests
