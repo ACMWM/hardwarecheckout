@@ -15,6 +15,8 @@ if baseurl is not None:
     app.wsgi_app = prefix.PrefixMiddleware(app.wsgi_app, prefix=baseurl)
 
 app.secret_key=os.environ.get("SECRET_KEY") or os.urandom(16)
+app.config['PREFERRED_URL_SCHEME'] = "https"
+
 app.register_blueprint(google.bp, url_prefix="/login")
 
 auth.init(app, "login")
