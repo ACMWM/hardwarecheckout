@@ -10,10 +10,10 @@
 		<th>Quantity</th>
 		<th>Available</th>
 	</tr>
-	{% set oldcat = None %}
+	{% set ns = namespace(oldcat=None) %}
 	{% for i in objs %}
-		{% if oldcat|string() != i.category|string() %}
-			{% set oldcat = i.category %}
+		{% if ns.oldcat != i.category %}
+			{% set ns.oldcat = i.category %}
 			<tr>
 				<th>{{ i.category }}</th>
 			</tr>
