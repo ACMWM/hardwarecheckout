@@ -42,7 +42,7 @@ def add():
 def update(id):
     hw = sql.gethw(id)
     if hw is None:
-        return "No such Hardware!"
+        return render_template("error.html", msg="No such Hardware!")
     form = forms.UpdateHW()
     form.sethw(hw)
     if form.validate_on_submit():
@@ -57,7 +57,7 @@ def update(id):
 def delete(id):
     hw = sql.gethw(int(id))
     if hw is None:
-        return "No such id."
+        return render_template("error.html", msg="No such id.")
     form = forms.RemoveHW()
     form.sethw(hw)
     if hw is None:
@@ -76,7 +76,7 @@ def checkout(id):
     form = forms.Checkout()
     hw = sql.gethw(id)
     if hw is None:
-        return "No such hardware!"
+        return render_template("error.html", msg="No such hardware!")
     form.sethw(hw)
     if hw.available < 1:
         flash("No "+hw.name+" available to checkout!")
@@ -96,7 +96,7 @@ def Return(id):
     form = forms.Return()
     chk = sql.getchk(id)
     if chk is None:
-        return "No such checkout!"
+        return render_template("error.html", msg="No such checkout!")
     form.setchk(chk)
     if chk.returndate != None:
         flash("Already Returned!")
@@ -111,7 +111,7 @@ def Return(id):
 def show(id):
     hw=sql.gethw(id)
     if hw is None:
-        return "No such hardware!"
+        return render_template("error.html", msg="No such hardware!")
     return render_template("hw.html", hw=hw)
 
 @app.route("/newuser/", methods=["GET", "POST"])
@@ -125,11 +125,11 @@ def newuser():
 
 @app.route("/privacy/")
 def private():
-    return """
+    return render_template("error.html", msg="""
 We hereby promise never to ever do anything with your information except
 use your email to confirm you are authorized to check out hardware for the
 William and Mary ACM.
-"""
+""")
 
 @app.route("/")
 @app.route("/search/<keyword>/")
