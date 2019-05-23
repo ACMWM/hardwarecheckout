@@ -36,10 +36,8 @@ class Checkout(FlaskForm):
     outdate = DateTimeField("Date", validators=[DataRequired()],
             default=datetime.now)
     who = StringField("Who", validators=[DataRequired()])
-    #what =
     reason = StringField("Reason")
     quantity = IntegerField("Quantity", validators=[DataRequired()])
-    #authorized =
     submit = SubmitField("Checkout")
 
     def sethw(self, hw):
