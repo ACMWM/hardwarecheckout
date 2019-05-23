@@ -1,3 +1,10 @@
 .navlist li {
 	display: inline;
 }
+
+.catrow {
+	text-align: center;
+}
+.catrow th {
+	padding-top: 10px;
+}
