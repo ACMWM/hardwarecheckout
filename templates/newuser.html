@@ -2,5 +2,7 @@
 {% block title %}Add Hardware{% endblock %}
 
 {% block form %}
-{{ rf(form.email) }}@email.wm.edu
+{{ form.email.label }}
+{{ form.email() }}@email.wm.edu
+{{ ferrors(form.email) }}
 {% endblock %}
