@@ -11,7 +11,7 @@ if len(sys.argv) != 2:
 
 sql.init_db()
 email = sys.argv[1]+"@"+auth.domain
-if validemail(email) is None:
+if auth.validemail(email) is None:
     print(email+" is not a valid email.")
     sys.exit(2)
 
