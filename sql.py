@@ -27,7 +27,7 @@ def add(obj):
     commit()
 
 def checkemail(email):
-    return db_session.query(User).filterby(email=email).first()
+    return db_session.query(User).filter_by(email=email).first()
 
 def newuser(email):
     add(User(email=email))
