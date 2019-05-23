@@ -52,13 +52,13 @@ def update(id):
     if hw is None:
         return render_template("error.html", msg="No such Hardware!")
     form = forms.UpdateHW()
-    form.sethw(hw)
     if form.validate_on_submit():
         form.populate_obj(hw)
         if hw.quantity < hw.available:
             hw.available = hw.quantity
         sql.commit()
         return redirect(url_for("list"))
+    form.sethw(hw)
     return render_template("updatehw.html", form=form)
 
 @app.route("/delete/<id>/", methods=["GET", "POST"])
