@@ -4,7 +4,7 @@ import os
 
 import google
 import sql
-import login
+import auth
 import forms
 import prefix
 
@@ -16,7 +16,7 @@ if baseurl is not None:
 
 app.secret_key=os.environ.get("SECRET_KEY") or os.urandom(16)
 app.register_blueprint(google.bp, url_prefix="/login")
-login.init(app)
+auth.init(app)
 
 sql.init_db()
 
@@ -30,11 +30,11 @@ def LogIn():
 
 @app.route("/logout/")
 def LogOut():
-    login.logout_user()
+    auth.logout_user()
     return redirect(url_for("list"))
 
 @app.route("/add/", methods=["GET", "POST"])
-@login.login_required
+@auth.login_required
 def add():
     form = forms.AddHW()
     if form.validate_on_submit():
@@ -45,7 +45,7 @@ def add():
 
 
 @app.route("/update/<id>/", methods=["GET", "POST"])
-@login.login_required
+@auth.login_required
 def update(id):
     hw = sql.gethw(id)
     if hw is None:
@@ -61,7 +61,7 @@ def update(id):
     return render_template("updatehw.html", form=form)
 
 @app.route("/delete/<id>/", methods=["GET", "POST"])
-@login.login_required
+@auth.login_required
 def delete(id):
     hw = sql.gethw(int(id))
     if hw is None:
@@ -80,7 +80,7 @@ def delete(id):
         return render_template("delhw.html", form=form)
 
 @app.route("/checkout/<id>/", methods=["GET", "POST"])
-@login.login_required
+@auth.login_required
 def checkout(id):
     form = forms.Checkout()
     hw = sql.gethw(id)
@@ -93,7 +93,7 @@ def checkout(id):
     if form.validate_on_submit():
         flash("Checkout of "+hw.name+" x"+str(form.quantity.data)+" by "+form.who.data)
         sql.checkout(form.outdate.data, form.who.data, hw, form.reason.data,
-                form.quantity.data, login.current_user)
+                form.quantity.data, auth.current_user)
         hw.available -= form.quantity.data
         sql.commit()
         return redirect(url_for("current"))
@@ -101,7 +101,7 @@ def checkout(id):
         return render_template("outform.html", form=form, hw=hw)
 
 @app.route("/return/<id>/", methods=["GET", "POST"])
-@login.login_required
+@auth.login_required
 def Return(id):
     form = forms.Return()
     chk = sql.getchk(id)
@@ -112,7 +112,7 @@ def Return(id):
         flash("Already Returned!")
         return redirect(url_for("list"))
     if form.validate_on_submit():
-        sql.Return(chk, login.current_user, form.returndate.data)
+        sql.Return(chk, auth.current_user, form.returndate.data)
         return redirect(url_for("current"))
     else:
         return render_template("return.html", form=form)
@@ -125,7 +125,7 @@ def show(id):
     return render_template("hw.html", hw=hw)
 
 @app.route("/newuser/", methods=["GET", "POST"])
-@login.login_required
+@auth.login_required
 def newuser():
     form = forms.NewUser()
     if form.validate_on_submit():

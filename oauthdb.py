@@ -7,12 +7,11 @@ from models import User
 
 import google
 import auth
-import login
 
 class OAuth(OAuthConsumerMixin, Base):
     user_id = Column(Integer, ForeignKey(User.id))
     user = relationship(User)
 
 def storage(session):
-    store = SQLAlchemyStorage(OAuth, session, user=login.current_user, user_required=False)
+    store = SQLAlchemyStorage(OAuth, session, user=auth.current_user, user_required=False)
     google.setstorage(store)

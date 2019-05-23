@@ -1,4 +1,4 @@
-from flask import session
+from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from re import compile
 import sql
 
@@ -14,3 +14,13 @@ def validemail(e):
 def setname(user, name):
     user.name = name
     sql.commit()
+
+def load_user(user_id):
+    return sql.getuser(user_id)
+
+manager = None
+def init(app):
+    global manager
+    manager = LoginManager()
+    manager.init_app(app)
+    manager.user_loader(load_user)
