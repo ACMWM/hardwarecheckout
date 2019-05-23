@@ -39,6 +39,8 @@ def check_hosted_domain_and_email(blueprint, token):
     lguser = auth.checkemail(user['email'])
     if lguser is not None:
         flash("Logged in "+user['email'])
+        if lguser.name is None:
+            auth.setname(lguser, user['name'])
         login.login_user(lguser)
     else:
         flash("Invalid email "+user['email'])
