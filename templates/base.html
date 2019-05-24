@@ -12,6 +12,11 @@
 <section class="content">
   <header>
     {% block header %}{% endblock %}
+    {% if current_user.is_authenticated %}
+	<span>{{ current_user.name }}</span>
+	<a class="page-link" href="{{ url_for('newuser') }}">Add User</a>
+	<a class="page-link" href="{{ url_for('add') }}">Add Hardware</a>
+	{% endif %}
   </header>
   {% for message in get_flashed_messages() %}
     <div class="flash">{{ message }}</div>
