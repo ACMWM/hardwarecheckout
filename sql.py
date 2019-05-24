@@ -35,8 +35,8 @@ def newuser(email):
     add(User(id=email))
 
 def deluser(email):
-    getuser(email).delete()
-
+    db_session.delete(getuser(email))
+    commit()
 
 def setname(user, name):
     user.name = name
