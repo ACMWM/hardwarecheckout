@@ -13,7 +13,7 @@
 {# Render Field in Form #}
 {# http://flask.pocoo.org/docs/0.12/patterns/wtforms/ #}
 {% macro rf(field) %}
-  <div>
+  <div class="field">
 	{{ field.label }}
 	{{ field(**kwargs)|safe }}
 	{{ ferrors(field) }}
