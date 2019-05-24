@@ -141,7 +141,7 @@ def newuser():
 @auth.login_required
 def deluser():
     form = forms.DelUser()
-    form.email.choices = [(u.email, u.name) for u in sql.allusers()]
+    form.email.choices = [(u.email, u.email) for u in sql.allusers()]
     if form.validate_on_submit():
         sql.deluser(form.email.data)
         flash("Deleted "+form.email.data)
