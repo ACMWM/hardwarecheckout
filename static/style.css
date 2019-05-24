@@ -17,6 +17,9 @@
 .catrow th {
 	padding-top: 10px;
 }
+.catrow td {
+	padding-left: 5px;
+}
 
 .field {
 	padding: 5px;
