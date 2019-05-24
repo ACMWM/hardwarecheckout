@@ -45,7 +45,7 @@ def getchk(id):
     return db_session.query(Checkout).get(id)
 
 def search(keyword):
-    q = db_session.query(HW).order_by(HW.category)
+    q = db_session.query(HW).order_by(HW.category).order_by(HW.name)
     if keyword is None:
         return q
     else:
