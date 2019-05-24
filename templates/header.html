@@ -1,13 +1,14 @@
 <header class="site-header">
 
+	{% set url = "https://acmhw.herokuapp.com" %}
   <div class="wrapper">
 
-    <a class="site-title" href="https://acmhw.herokuapp.com">
+	  <a class="site-title" href="{{ url }}">
 		<img src="https://acmwm.github.io/images/logo.png" />
 	</a>
 
 <nav class="site-nav">
-	<span class="page-link">Hardware</span>
+	<a href="{{ url }}" class="page-link">Hardware</a>
     {% if current_user.is_authenticated %}
 	<span>{{ current_user.name }}</span>
 	<a class="page-link" href="{{ url_for('logout') }}">Log Out</a>
