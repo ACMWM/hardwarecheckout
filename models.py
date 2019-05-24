@@ -7,7 +7,7 @@ Base = declarative_base()
 
 class User(Base, UserMixin):
     __tablename__ = "Users"
-    email = Column(String, unique=True, primary_key=True)
+    id = Column(String, unique=True, primary_key=True)
     name = Column(String)
 
 class HW(Base):

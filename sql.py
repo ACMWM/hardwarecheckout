@@ -29,7 +29,7 @@ def allusers():
     return db_session.query(User).order_by(User.name)
 
 def getuser(e):
-    return db_session.query(User).filter_by(email=e).first()
+    return db_session.query(User).get(e)
 
 def newuser(email):
     add(User(email=email))
