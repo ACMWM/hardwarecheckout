@@ -14,9 +14,9 @@ Base.query = db_session.query_property()
 
 from models import HW, User, Checkout
 
-def init_db():
+def init_db(auth, google):
     import oauthdb
-    oauthdb.storage(db_session)
+    oauthdb.storage(db_session, auth, google)
     Base.metadata.create_all(bind=engine, checkfirst=True)
 
 def commit():
