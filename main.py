@@ -19,7 +19,7 @@ app.config['PREFERRED_URL_SCHEME'] = "https"
 
 app.register_blueprint(google.bp, url_prefix="/login")
 
-auth.init(app, "login")
+auth.init(app, "login", sql)
 
 sql.init_db()
 

@@ -35,6 +35,10 @@ def newuser(email):
 def getuser(uid):
     return db_session.query(User).get(uid)
 
+def setname(user, name):
+    user.name = name
+    sql.commit()
+
 def gethw(id):
     return db_session.query(HW).get(id)
 

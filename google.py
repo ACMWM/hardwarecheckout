@@ -24,10 +24,15 @@ def userinfo():
     assert resp.ok, resp.text
     return resp.json()
 
+sql = None
+def init(s):
+    global sql
+    sql = s
+
 @oauth_authorized.connect_via(bp)
 def check_hosted_domain_and_email(blueprint, token):
     user = userinfo()
-    lguser = auth.checkemail(user['email'])
+    lguser = sql.checkemail(user['email'])
     if lguser is None:
         flash("Unauthorized user "+user['email'])
         if user["hd"] != blueprint.authorization_url_params["hd"]:
@@ -41,5 +46,5 @@ def check_hosted_domain_and_email(blueprint, token):
     else:
         flash("Logged in "+user['email'])
         if lguser.name is None:
-            auth.setname(lguser, user['name'])
+            sql.setname(lguser, user['name'])
         auth.login_user(lguser)
