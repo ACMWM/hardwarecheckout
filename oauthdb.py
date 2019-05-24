@@ -1,9 +1,8 @@
-from sqlalchemy import Column, Integer, ForeignKey
+from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from flask_dance.consumer.storage.sqla import OAuthConsumerMixin, SQLAlchemyStorage
 
-from sql import Base
-from models import User
+from models import Base, User
 
 
 class OAuth(OAuthConsumerMixin, Base):
