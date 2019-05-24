@@ -12,9 +12,10 @@ db_session = scoped_session(sessionmaker(autocommit=False,
                                          bind=engine))
 Base.query = db_session.query_property()
 
-def init_db(auth, google):
+def init_db(auth=None, google=None):
     import oauthdb
-    oauthdb.storage(db_session, auth, google)
+    if auth is not None and google is not None:
+        oauthdb.storage(db_session, auth, google)
     Base.metadata.create_all(bind=engine, checkfirst=True)
 
 def commit():
