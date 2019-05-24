@@ -9,7 +9,6 @@
 
 <nav class="site-nav">
 	<a href="{{ url }}" class="page-link">Hardware</a>
-	<a class="page-link" href="{{ url_for('list') }}">Hardware List</a>
 	<a class="page-link" href="{{ url_for('current') }}">Currently Out</a>
 	<a class="page-link" href="{{ url_for('history') }}">History</a>
 	{% if current_user.is_authenticated %}
