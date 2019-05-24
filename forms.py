@@ -74,5 +74,5 @@ class NewUser(FlaskForm):
         if auth.validemail(field.data) is None:
             raise ValidationError("Must be a valid email!")
 
-class DelUser(NewUser):
+class DelUser(FlaskForm):
     email = SelectField("User")
