@@ -28,8 +28,8 @@ def add(obj):
 def allusers():
     return db_session.query(User).order_by(User.name)
 
-def checkemail(email):
-    return db_session.query(User).filter_by(email=email).first()
+def getuser(e):
+    return db_session.query(User).filter_by(email=e).first()
 
 def newuser(email):
     add(User(email=email))
@@ -37,8 +37,6 @@ def newuser(email):
 def deluser(email):
     getuser(email).delete()
 
-def getuser(uid):
-    return db_session.query(User).get(uid)
 
 def setname(user, name):
     user.name = name

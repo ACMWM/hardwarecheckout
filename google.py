@@ -32,7 +32,7 @@ def init(s):
 @oauth_authorized.connect_via(bp)
 def check_hosted_domain_and_email(blueprint, token):
     user = userinfo()
-    lguser = sql.checkemail(user['email'])
+    lguser = sql.getuser(user['email'])
     if lguser is None:
         flash("Unauthorized user "+user['email'])
         if user["hd"] != blueprint.authorization_url_params["hd"]:
