@@ -15,7 +15,14 @@ if baseurl is not None:
     app.wsgi_app = prefix.PrefixMiddleware(app.wsgi_app, prefix=baseurl)
 
 app.secret_key=os.environ.get("SECRET_KEY") or os.urandom(16)
-app.config['PREFERRED_URL_SCHEME'] = "https"
+if os.environ.get("ENFORCE_HTTPS") is not None:
+    app.config['PREFERRED_URL_SCHEME'] = "https"
+    # https://stackoverflow.com/a/32238093
+    @app.before_request
+    def before_request():
+        if not request.is_secure:
+            url = request.url.replace('http://', 'https://', 1)
+            return redirect(url, code=301)
 
 app.register_blueprint(google.bp, url_prefix="/login")
 
