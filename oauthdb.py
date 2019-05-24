@@ -6,7 +6,7 @@ from models import Base, User
 
 
 class OAuth(OAuthConsumerMixin, Base):
-    user_id = Column(String, ForeignKey(User.email))
+    user_id = Column(String, ForeignKey(User.id))
     user = relationship(User)
 
 def storage(session, auth, google):
