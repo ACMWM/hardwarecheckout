@@ -76,3 +76,4 @@ class NewUser(FlaskForm):
 
 class DelUser(FlaskForm):
     email = SelectField("User")
+    submit = SubmitField()
