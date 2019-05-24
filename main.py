@@ -20,8 +20,8 @@ app.config['PREFERRED_URL_SCHEME'] = "https"
 app.register_blueprint(google.bp, url_prefix="/login")
 
 auth.init(app, "login", sql)
-
 sql.init_db(auth, google)
+google.init(sql)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
