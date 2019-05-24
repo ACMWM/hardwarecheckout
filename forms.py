@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, IntegerField, SubmitField
+from wtforms import StringField, BooleanField, IntegerField, SelectField, SubmitField
 from wtforms.fields.html5 import DateTimeField
 from wtforms.validators import DataRequired, ValidationError
 
@@ -73,3 +73,6 @@ class NewUser(FlaskForm):
         field.data += "@"+auth.domain
         if auth.validemail(field.data) is None:
             raise ValidationError("Must be a valid email!")
+
+class DelUser(FlaskForm):
+    email = SelectField("User")

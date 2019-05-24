@@ -25,6 +25,9 @@ def add(obj):
     db_session.add(obj)
     commit()
 
+def allusers():
+    return db_session.query(User).order_by(User.name)
+
 def checkemail(email):
     return db_session.query(User).filter_by(email=email).first()
 

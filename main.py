@@ -137,6 +137,17 @@ def newuser():
         return redirect(url_for("list"))
     return render_template("newuser.html", form=form)
 
+@app.route("/deluser/", methods=["GET", "POST"])
+@auth.login_required
+def deluser():
+    form = forms.DelUser()
+    form.email.choices = [(u.email, u.name) for u in sql.allusers()]
+    if form.validate_on_submit():
+        sql.deluser(form.email.data)
+        flash("Deleted "+form.email.data)
+        return redirect(url_for("list"))
+    return render_template("deluser.html", form=form)
+
 @app.route("/privacy/")
 def private():
     return render_template("error.html", msg="""

@@ -16,6 +16,7 @@
 	<div class="auth">
 		<span>{{ current_user.name }}</span>
 		<a class="page-link" href="{{ url_for('newuser') }}">Add User</a>
+		<a class="page-link" href="{{ url_for('deluser') }}">Delete User</a>
 		<a class="page-link" href="{{ url_for('add') }}">Add Hardware</a>
 	</div>
 	{% endif %}
