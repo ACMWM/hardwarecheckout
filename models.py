@@ -6,9 +6,8 @@ from flask_login import UserMixin
 Base = declarative_base()
 
 class User(Base, UserMixin):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
-    email = Column(String, unique=True)
+    __tablename__ = "Users"
+    email = Column(String, unique=True, primary_key=True)
     name = Column(String)
 
 class HW(Base):

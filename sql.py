@@ -35,7 +35,7 @@ def newuser(email):
     add(User(email=email))
 
 def deluser(email):
-    db_session.query(User).filter_by(email=email).delete()
+    getuser(email).delete()
 
 def getuser(uid):
     return db_session.query(User).get(uid)
