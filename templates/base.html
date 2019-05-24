@@ -4,28 +4,11 @@
 	<title>ACM@WM: {% block title %}{% endblock %}</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 	<link rel="stylesheet" href="https://acmwm.github.io/css/main.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<nav>
-  <h1>Hardware</h1>
-  <ul class='navlist'>
-    {% if current_user.is_authenticated %}
-	<li><span>{{ current_user.name }}</span></li>
-	<li><a href="{{ url_for('logout') }}">Log Out</a></li>
-	<br>
-	<li><a href="{{ url_for('newuser') }}">Add User</a></li>
-	<li><a href="{{ url_for('add') }}">Add Hardware</a></li>
-    {% else %}
-	<li><a href="{{ url_for('login') }}">Log In</a></li>
-    {% endif %}
-	<br>
-	<li><a href="{{ url_for('list') }}">Hardware List</a></li>
-	<li><a href="{{ url_for('current') }}">Currently Out</a></li>
-	<li><a href="{{ url_for('history') }}">History</a></li>
-  </ul>
-</nav>
+{% include "header.html" %}
 <section class="content">
   <header>
     {% block header %}{% endblock %}

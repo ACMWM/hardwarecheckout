@@ -1,0 +1,26 @@
+<header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="https://acmhw.herokuapp.com">
+		<img src="https://acmwm.github.io/images/logo.png" />
+	</a>
+
+<nav class="site-nav">
+	<span class="page-link">Hardware</span>
+    {% if current_user.is_authenticated %}
+	<span>{{ current_user.name }}</span>
+	<a class="page-link" href="{{ url_for('logout') }}">Log Out</a>
+	<a class="page-link" href="{{ url_for('newuser') }}">Add User</a>
+	<a class="page-link" href="{{ url_for('add') }}">Add Hardware</a>
+    {% else %}
+	<a class="page-link" href="{{ url_for('login') }}">Log In</a>
+    {% endif %}
+	<a class="page-link" href="{{ url_for('list') }}">Hardware List</a>
+	<a class="page-link" href="{{ url_for('current') }}">Currently Out</a>
+	<a class="page-link" href="{{ url_for('history') }}">History</a>
+</nav>
+
+  </div>
+
+</header>
