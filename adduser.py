@@ -19,7 +19,7 @@ input("Are you sure you want to add "+email+"? Press Ctrl+C to cancel,"
         "or anything else to continue")
 
 
-u = User(email=email)
+u = User(id=email)
 sql.add(u)
 sql.commit()
 print("Added "+email+" to the authorized users list.")

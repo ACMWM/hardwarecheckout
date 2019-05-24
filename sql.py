@@ -32,7 +32,7 @@ def getuser(e):
     return db_session.query(User).get(e)
 
 def newuser(email):
-    add(User(email=email))
+    add(User(id=email))
 
 def deluser(email):
     getuser(email).delete()
@@ -71,12 +71,12 @@ def history():
 def checkout(outdate, who, hw, reason, quantity, user):
     c = Checkout(outdate=outdate, who=who, hardware=hw,
             what=hw.id, reason=reason, quantity=quantity, out_auth_user=user,
-            out_auth_email=user.email)
+            out_auth_email=user.id)
     add(c)
 
 def Return(chk, user, date):
     chk.returndate = date
     chk.hardware.available += chk.quantity
     chk.in_user_auth = user
-    chk.in_user_email = user.email
+    chk.in_user_email = user.id
     commit()
