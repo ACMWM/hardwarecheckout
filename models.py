@@ -31,8 +31,8 @@ class Checkout(Base):
     what = Column(Integer, ForeignKey(HW.id))
     hardware = relationship(HW, foreign_keys=[what])
 
-    out_auth_email = Column(String, ForeignKey(User.email))
+    out_auth_email = Column(String, ForeignKey(User.id))
     out_auth_user = relationship(User, foreign_keys=[out_auth_email])
 
-    in_auth_email = Column(String, ForeignKey(User.email))
+    in_auth_email = Column(String, ForeignKey(User.id))
     in_auth_user = relationship(User, foreign_keys=[in_auth_email])
