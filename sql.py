@@ -42,7 +42,7 @@ def getuser(uid):
 
 def setname(user, name):
     user.name = name
-    sql.commit()
+    commit()
 
 def gethw(id):
     return db_session.query(HW).get(id)
