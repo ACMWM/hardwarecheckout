@@ -1,7 +1,8 @@
 from os import environ
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+
+from models import Base, HW, User, Checkout
 
 db = environ.get("DATABASE_URL") or "sqlite:///test.db"
 
@@ -9,10 +10,7 @@ engine = create_engine(db, convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
-Base = declarative_base()
 Base.query = db_session.query_property()
-
-from models import HW, User, Checkout
 
 def init_db(auth, google):
     import oauthdb

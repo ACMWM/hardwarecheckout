@@ -1,7 +1,9 @@
 from sqlalchemy import Column, Boolean, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from sql import Base
+from sqlalchemy.ext.declarative import declarative_base
 from flask_login import UserMixin
+
+Base = declarative_base()
 
 class User(Base, UserMixin):
     __tablename__ = "users"
