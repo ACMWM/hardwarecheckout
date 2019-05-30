@@ -103,19 +103,22 @@ Contains all the templates, in
 
 We create four tables:
 
-`HW`: Database of hardware objects
+### `HW`
+Database of hardware objects
 
-`Users`: Names and emails of authorized users
+### `Users`
+Names and emails of authorized users
 
-`Checkouts`: Contains information on every checkout ever done
+### `Checkouts`
+Contains information on every checkout ever done
 
-See `models.py` for more details
+See `models.py` for more details on the above three tables
 
-`flask_dance_oauth`: Table used by Flask-Dance to store OAuth2 tokens
+### `flask_dance_oauth`
+Table used by Flask-Dance to store OAuth2 tokens
 See [it's documentation](https://flask-dance.readthedocs.io/en/latest/storages.html#sqlalchemy)
 
-See `oauthdb.py` for more details.
-
+See `oauthdb.py` for more details on the above table.
 
 ## Scripts
 
