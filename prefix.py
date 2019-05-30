@@ -1,4 +1,7 @@
 # https://stackoverflow.com/a/36033627/4237781
+# By su27, https://stackoverflow.com/users/783794/su27
+# Licensed under MIT, see LICENSE for details
+# https://meta.stackexchange.com/questions/271080/the-mit-license-clarity-on-using-code-on-stack-overflow-and-stack-exchange
 
 class PrefixMiddleware(object):
 
