@@ -3,6 +3,7 @@ test.db
 .env
 
 # virtualenv
+venv/
 bin/
 include/
 lib/

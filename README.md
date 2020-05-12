@@ -43,9 +43,10 @@ Values obtained from Google through the Credentials tab in the
 ## How to run
 
 You'll need Python 3 and all the requirements as denoted above, and more
-specifically in `requirements.txt`. If you have `virtualenv` installed, you
-can run `setup.sh` which will install all the requirements in the current
-directory. You can then use `run.sh`, along with a `.env` file to set environment
+specifically in `requirements.txt`. If you have the `venv` module installed,
+you can run `setup.sh` which will install all the requirements to a
+virtual environment in the `venv` folder in the current directory.
+You can then use `run.sh`, along with a `.env` file to set environment
 variables (see above) to run the application.
 
 ## Modules
