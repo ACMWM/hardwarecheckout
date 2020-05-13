@@ -40,6 +40,21 @@ connections to `https://`
 Values obtained from Google through the Credentials tab in the
 [Google API Console](https://console.developers.google.com/)
 
+You'll want an `OAuth 2.0 Client ID`.
+
+The application type is `Web application`.
+
+Google will require a domain name to call back to, so you'll
+either need your own or you can test on Heroku
+(Just please don't test in production!)
+
+The `Authorized JavaScript origins` should just be that location, and
+the `Authorized redirect URIs` should just be:
+```
+https://YOURDOMAINNAMEHERE/login/google/authorized
+```
+(https is preferrable and required for real deployment but not for testing)
+
 ## How to run
 
 You'll need Python 3 and all the requirements as denoted above, and more
