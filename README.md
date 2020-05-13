@@ -63,6 +63,11 @@ you can run `setup.sh` which will install all the requirements to a
 virtual environment in the `venv` folder in the current directory.
 You can then use `run.sh`, along with a `.env` file to set environment
 variables (see above) to run the application.
+The environment variables should be in `.env` in the format:
+```
+export VAR=VALUE
+```
+to ensure they are actually visible to the application.
 
 ## Modules
 
