@@ -77,6 +77,5 @@ def checkout(outdate, who, hw, reason, quantity, user):
 def Return(chk, user, date):
     chk.returndate = date
     chk.hardware.available += chk.quantity
-    chk.in_user_auth = user
-    chk.in_user_email = user.id
+    chk.in_auth_user = user
     commit()
