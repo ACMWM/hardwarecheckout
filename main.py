@@ -60,11 +60,11 @@ def update(id):
     hw = sql.gethw(id)
     if hw is None:
         return render_template("error.html", msg="No such Hardware!")
+    oldquantity = hw.quantity
     form = forms.UpdateHW()
     if form.validate_on_submit():
         form.populate_obj(hw)
-        if hw.quantity < hw.available:
-            hw.available = hw.quantity
+        hw.available += (hw.quantity - oldquantity)
         sql.commit()
         return redirect(url_for("list"))
     form.sethw(hw)
