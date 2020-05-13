@@ -69,6 +69,10 @@ export VAR=VALUE
 ```
 to ensure they are actually visible to the application.
 
+You'll then need to run `adduser.py` to get the first user
+(see scripts section below) and then you can do everything else
+via the application.
+
 ## Modules
 
 This application is divided into a series of files that each handles a separate
@@ -147,7 +151,6 @@ See `oauthdb.py` for more details on the above table.
 
 Adds `username@auth.domain` (currently `username@email.wm.edu`, see `auth.py`)
 to the users database
-
 
 `addhw.py <name> [quantity] [category]`
 
