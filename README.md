@@ -55,6 +55,12 @@ https://YOURDOMAINNAMEHERE/login/google/authorized
 ```
 (https is preferrable and required for real deployment but not for testing)
 
+## `OAUTHLIB_RELAX_TOKEN_SCOPE`
+Google does strange things with token scopes so you'll want to set this to 1
+
+## `OAUTHLIB_INSECURE_TRANSPORT`
+When running locally over http, you'll need to set this to 1
+
 ## How to run
 
 You'll need Python 3 and all the requirements as denoted above, and more
