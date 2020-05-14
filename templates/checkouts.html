@@ -16,7 +16,7 @@
 	<tr>
 		<td> {{ r.outdate }} </td>
 		<td> {{ r.who }} </td>
-		<td> <a href="{{ url_for('show', id=r.id) }}">
+		<td> <a href="{{ url_for('show', id=r.hardware.id) }}">
 				{{ r.hardware.name }}</a> </td>
 		<td> {{ r.quantity }} </td>
 		<td> {{ r.reason }} </td>
