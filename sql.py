@@ -4,78 +4,84 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 from models import Base, HW, User, Checkout
 
-db = environ.get("DATABASE_URL") or "sqlite:///test.db"
-
-engine = create_engine(db, convert_unicode=True)
-db_session = scoped_session(sessionmaker(autocommit=False,
+class SQL:
+    def __init__(self, google=None, db=None):
+        if db is None:
+            db = environ.get("DATABASE_URL") or "sqlite:///test.db"
+        self._db = db
+        self._engine = create_engine(db, convert_unicode=True)
+        self.db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
-                                         bind=engine))
-Base.query = db_session.query_property()
+                                         bind=self._engine))
+        Base.query = self.db_session.query_property()
+        self._createall()
 
-def init_db(google=None):
-    import oauthdb
-    if google is not None:
-        oauthdb.storage(db_session, google)
-    Base.metadata.create_all(bind=engine, checkfirst=True)
+    def _createall(self):
+        Base.metadata.create_all(bind=self._engine, checkfirst=True)
 
-def commit():
-    db_session.commit()
+    def setgoogle(self, google):
+        import oauthdb
+        oauthdb.storage(self.db_session, google)
+        self._createall()
 
-def add(obj):
-    db_session.add(obj)
-    commit()
+    def commit(self):
+        self.db_session.commit()
 
-def allusers():
-    return db_session.query(User).order_by(User.name)
+    def add(self, obj):
+        self.db_session.add(obj)
+        self.commit()
 
-def getuser(e):
-    return db_session.query(User).get(e)
+    def allusers(self):
+        return self.db_session.query(User).order_by(User.name)
 
-def newuser(email):
-    add(User(id=email))
+    def getuser(self, e):
+        return self.db_session.query(User).get(e)
 
-def deluser(email):
-    db_session.delete(getuser(email))
-    commit()
+    def newuser(self, email):
+        self.add(User(id=email))
 
-def setname(user, name):
-    user.name = name
-    commit()
+    def deluser(self, email):
+        self.db_session.delete(self.getuser(email))
+        self.commit()
 
-def gethw(id):
-    return db_session.query(HW).get(id)
+    def setname(self, user, name):
+        user.name = name
+        self.commit()
 
-def getchk(id):
-    return db_session.query(Checkout).get(id)
+    def gethw(self, id):
+        return self.db_session.query(HW).get(id)
 
-def search(keyword):
-    q = db_session.query(HW).order_by(HW.category).order_by(HW.name)
-    if keyword is None:
-        return q
-    else:
-        return q.filter(HW.name.like('%'+keyword+'%'))
+    def getchk(self, id):
+        return self.db_session.query(Checkout).get(id)
 
-def addhw(name, category, quantity):
-    h = HW(name=name, category=category, quantity=quantity, available=quantity)
-    add(h)
+    def search(self, keyword):
+        q = self.db_session.query(HW).order_by(HW.category).order_by(HW.name)
+        if keyword is None:
+            return q
+        else:
+            return q.filter(HW.name.like('%'+keyword+'%'))
 
-def categories():
-    return db_session.query(HW.category).distinct()
+    def addhw(self, name, category, quantity):
+        h = HW(name=name, category=category, quantity=quantity, available=quantity)
+        self.add(h)
 
-def current():
-    return db_session.query(Checkout).filter(Checkout.returndate==None).all()
+    def categories(self):
+        return self.db_session.query(HW.category).distinct()
 
-def history():
-    return db_session.query(Checkout).filter(Checkout.returndate!=None).all()
+    def current(self):
+        return self.db_session.query(Checkout).filter(Checkout.returndate==None).all()
 
-def checkout(outdate, who, hw, reason, quantity, user):
-    c = Checkout(outdate=outdate, who=who, hardware=hw,
-            what=hw.id, reason=reason, quantity=quantity, out_auth_user=user,
-            out_auth_email=user.id)
-    add(c)
+    def history(self):
+        return self.db_session.query(Checkout).filter(Checkout.returndate!=None).all()
 
-def Return(chk, user, date):
-    chk.returndate = date
-    chk.hardware.available += chk.quantity
-    chk.in_auth_user = user
-    commit()
+    def checkout(self, outdate, who, hw, reason, quantity, user):
+        c = Checkout(outdate=outdate, who=who, hardware=hw,
+                what=hw.id, reason=reason, quantity=quantity, out_auth_user=user,
+                out_auth_email=user.id)
+        self.add(c)
+
+    def Return(self, chk, user, date):
+        chk.returndate = date
+        chk.hardware.available += chk.quantity
+        chk.in_auth_user = user
+        self.commit()

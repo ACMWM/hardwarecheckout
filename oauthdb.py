@@ -10,6 +10,6 @@ class OAuth(OAuthConsumerMixin, Base):
     user_id = Column(String, ForeignKey(User.id))
     user = relationship(User)
 
-def storage(session, google):
+def storage(session, googlebp):
     store = SQLAlchemyStorage(OAuth, session, user=auth.current_user, user_required=False)
-    google.setstorage(store)
+    googlebp.setstorage(store)

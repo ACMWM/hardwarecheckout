@@ -24,15 +24,18 @@ if os.environ.get("ENFORCE_HTTPS") is not None:
             url = request.url.replace('http://', 'https://', 1)
             return redirect(url, code=301)
 
-app.register_blueprint(google.bp, url_prefix="/login")
 
-auth.initmanager(app, "login", sql)
-sql.init_db(google)
-google.init(sql)
+sqldb = sql.SQL()
+auth.initmanager(app, "login", sqldb)
+bp = google.Blueprint(sqldb)
+google.setupoauth(bp)
+sqldb.setgoogle(bp)
+
+app.register_blueprint(bp.bp, url_prefix="/login")
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
-    sql.db_session.remove()
+    sqldb.db_session.remove()
 
 @app.route("/login/")
 def login():
@@ -49,15 +52,15 @@ def add():
     form = forms.AddHW()
     if form.validate_on_submit():
         flash("Added "+form.name.data)
-        sql.addhw(form.name.data, form.category.data, form.quantity.data)
+        sqldb.addhw(form.name.data, form.category.data, form.quantity.data)
         return redirect(url_for("list"))
-    return render_template("addhw.html", form=form, cat=sql.categories())
+    return render_template("addhw.html", form=form, cat=sqldb.categories())
 
 
 @app.route("/update/<id>/", methods=["GET", "POST"])
 @auth.login_required
 def update(id):
-    hw = sql.gethw(id)
+    hw = sqldb.gethw(id)
     if hw is None:
         return render_template("error.html", msg="No such Hardware!")
     oldquantity = hw.quantity
@@ -65,15 +68,15 @@ def update(id):
     if form.validate_on_submit():
         form.populate_obj(hw)
         hw.available += (hw.quantity - oldquantity)
-        sql.commit()
+        sqldb.commit()
         return redirect(url_for("list"))
     form.sethw(hw)
-    return render_template("updatehw.html", form=form, cat=sql.categories())
+    return render_template("updatehw.html", form=form, cat=sqldb.categories())
 
 @app.route("/delete/<id>/", methods=["GET", "POST"])
 @auth.login_required
 def delete(id):
-    hw = sql.gethw(int(id))
+    hw = sqldb.gethw(int(id))
     if hw is None:
         return render_template("error.html", msg="No such id.")
     form = forms.RemoveHW()
@@ -83,7 +86,7 @@ def delete(id):
     if form.validate_on_submit():
         hw.quantity = 0
         hw.available = 0
-        sql.commit()
+        sqldb.commit()
         flash("Deleted "+hw.name)
         return redirect(url_for("list"))
     else:
@@ -93,7 +96,7 @@ def delete(id):
 @auth.login_required
 def checkout(id):
     form = forms.Checkout()
-    hw = sql.gethw(id)
+    hw = sqldb.gethw(id)
     if hw is None:
         return render_template("error.html", msg="No such hardware!")
     form.sethw(hw)
@@ -102,10 +105,10 @@ def checkout(id):
         return redirect(url_for("list"))
     if form.validate_on_submit():
         flash("Checkout of "+hw.name+" x"+str(form.quantity.data)+" by "+form.who.data)
-        sql.checkout(form.outdate.data, form.who.data, hw, form.reason.data,
+        sqldb.checkout(form.outdate.data, form.who.data, hw, form.reason.data,
                 form.quantity.data, auth.current_user)
         hw.available -= form.quantity.data
-        sql.commit()
+        sqldb.commit()
         return redirect(url_for("current"))
     else:
         return render_template("outform.html", form=form, hw=hw)
@@ -114,7 +117,7 @@ def checkout(id):
 @auth.login_required
 def Return(id):
     form = forms.Return()
-    chk = sql.getchk(id)
+    chk = sqldb.getchk(id)
     if chk is None:
         return render_template("error.html", msg="No such checkout!")
     form.setchk(chk)
@@ -122,14 +125,14 @@ def Return(id):
         flash("Already Returned!")
         return redirect(url_for("list"))
     if form.validate_on_submit():
-        sql.Return(chk, auth.current_user, form.returndate.data)
+        sqldb.Return(chk, auth.current_user, form.returndate.data)
         return redirect(url_for("current"))
     else:
         return render_template("return.html", form=form)
 
 @app.route("/show/<id>/")
 def show(id):
-    hw=sql.gethw(id)
+    hw=sqldb.gethw(id)
     if hw is None:
         return render_template("error.html", msg="No such hardware!")
     return render_template("show.html", hw=hw)
@@ -139,7 +142,7 @@ def show(id):
 def newuser():
     form = forms.NewUser()
     if form.validate_on_submit():
-        sql.newuser(form.email.data)
+        sqldb.newuser(form.email.data)
         flash("Added "+form.email.data)
         return redirect(url_for("list"))
     return render_template("newuser.html", form=form)
@@ -148,9 +151,9 @@ def newuser():
 @auth.login_required
 def deluser():
     form = forms.DelUser()
-    form.email.choices = [(u.id, u.id) for u in sql.allusers()]
+    form.email.choices = [(u.id, u.id) for u in sqldb.allusers()]
     if form.validate_on_submit():
-        sql.deluser(form.email.data)
+        sqldb.deluser(form.email.data)
         flash("Deleted "+form.email.data)
         return redirect(url_for("list"))
     return render_template("deluser.html", form=form)
@@ -166,16 +169,16 @@ William and Mary ACM.
 @app.route("/")
 @app.route("/search/<keyword>/")
 def list(keyword=None):
-    s = sql.search(keyword)
+    s = sqldb.search(keyword)
     return render_template("list.html", objs=s)
 
 @app.route("/current/")
 def current():
-    return render_template("checkouts.html", rows=sql.current())
+    return render_template("checkouts.html", rows=sqldb.current())
 
 @app.route("/history/")
 def history():
-    return render_template("checkouts.html", rows=sql.history())
+    return render_template("checkouts.html", rows=sqldb.history())
 
 if __name__ == "__main__":
     app.run()
