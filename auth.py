@@ -3,14 +3,15 @@ from re import compile
 
 domain = "email.wm.edu"
 
-_email = compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
+class EmailRegex:
 
-def validemail(e):
-    return _email.fullmatch(e)
+    def __init__(self):
+        self._email = compile(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)")
 
-manager = None
-def init(app, view, sql):
-    global manager
+    def validemail(self, e):
+        return self._email.fullmatch(e)
+
+def initmanager(app, view, sql):
     manager = LoginManager()
     manager.init_app(app)
     manager.user_loader(sql.getuser)

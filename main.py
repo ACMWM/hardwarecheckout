@@ -26,8 +26,8 @@ if os.environ.get("ENFORCE_HTTPS") is not None:
 
 app.register_blueprint(google.bp, url_prefix="/login")
 
-auth.init(app, "login", sql)
-sql.init_db(auth, google)
+auth.initmanager(app, "login", sql)
+sql.init_db(google)
 google.init(sql)
 
 @app.teardown_appcontext

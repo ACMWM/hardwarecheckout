@@ -6,6 +6,7 @@ from wtforms.validators import DataRequired, ValidationError
 
 import auth
 
+ve = auth.EmailRegex()
 
 class AddHW(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
@@ -71,7 +72,7 @@ class NewUser(FlaskForm):
 
     def validate_email(form, field):
         field.data += "@"+auth.domain
-        if auth.validemail(field.data) is None:
+        if ve.validemail(field.data) is None:
             raise ValidationError("Must be a valid email!")
 
 class DelUser(FlaskForm):
