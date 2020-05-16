@@ -80,7 +80,7 @@ class SQL:
                 out_auth_email=user.id)
         self.add(c)
 
-    def Return(self, chk, user, date):
+    def checkin(self, chk, user, date):
         chk.returndate = date
         chk.hardware.available += chk.quantity
         chk.in_auth_user = user

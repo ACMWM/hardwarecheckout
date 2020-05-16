@@ -33,7 +33,7 @@
 			{% if r.returndate != None %}
 			{{ r.returndate }} </td>
 			{% else %}
-			<a href="{{ url_for('Return', id=r.id) }}">Return</a>
+			<a href="{{ url_for('checkin', id=r.id) }}">Return</a>
 			{% endif %}
 		</td>
 	</tr>

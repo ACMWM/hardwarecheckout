@@ -115,8 +115,8 @@ def checkout(id):
 
 @app.route("/return/<id>/", methods=["GET", "POST"])
 @auth.login_required
-def Return(id):
-    form = forms.Return()
+def checkin(id):
+    form = forms.Checkin()
     chk = sqldb.getchk(id)
     if chk is None:
         return render_template("error.html", msg="No such checkout!")
@@ -125,7 +125,7 @@ def Return(id):
         flash("Already Returned!")
         return redirect(url_for("list"))
     if form.validate_on_submit():
-        sqldb.Return(chk, auth.current_user, form.returndate.data)
+        sqldb.checkin(chk, auth.current_user, form.returndate.data)
         return redirect(url_for("current"))
     else:
         return render_template("return.html", form=form)

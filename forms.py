@@ -50,7 +50,7 @@ class Checkout(FlaskForm):
         elif field.data > form.hw.available:
             raise ValidationError("Only "+str(form.hw.available)+" available!")
 
-class Return(FlaskForm):
+class Checkin(FlaskForm):
     returndate = DateTimeField("Date", validators=[DataRequired()],
             default=datetime.now)
     confirm = BooleanField("I Confirm that ", validators=[DataRequired()])
